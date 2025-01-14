@@ -10,23 +10,14 @@ body{
     background-color: $main-light;
     color: $main-dark;
 }
-footer{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: auto;
-    position: fixed;
-    bottom: 0;
-}
-#footerContainer{
-    background-color: $main-dark;
-    color: $main-light;
-    width: 90%;
-    padding: 20px;
-    margin: auto;
-    position: fixed;
-    bottom: 0;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
+
+.p-button {
+    background-color: #af4c4c; /* Remplacez par votre couleur */
+    border-color: #af5c4c; /* Assurez une bordure cohérente */
+    color: white; /* Couleur du texte */
+  }
+  
+  .p-button-primary:hover {
+    background-color: #a04545; /* Couleur au survol */
+  }
 
