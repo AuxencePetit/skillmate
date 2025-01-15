@@ -1,0 +1,27 @@
+#container{
+    display: flex;
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+#text{
+    display: grid;
+    width: 50%;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+}
+#text h1{
+    font-size: 4rem;
+    font-weight: 700;
+    color: #333;
+}
+#text p{
+    font-size: 1.25rem;
+    color: #333;
+}
+img{
+    width: 35%;
+}
