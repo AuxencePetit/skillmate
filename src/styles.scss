@@ -36,3 +36,22 @@ body{
   background: $main-green; 
   border-radius: 10px;
 }
+:host ::ng-deep .primaryBtn {
+  background-color: $main-green !important; /* Couleur de fond personnalisée */
+  color: $main-light !important; /* Couleur du texte */
+  border-color: $main-green !important; /* Couleur de la bordure */
+  border-radius: 8px; /* Arrondi global */
+}
+:host ::ng-deep .primaryBtn:hover {
+  background-color: darken($main-green, 10%) !important; /* Couleur au survol */
+}
+
+:host ::ng-deep .alternateBtn {
+  background-color: $main-dark !important; /* Couleur de fond personnalisée */
+  color: $main-green !important; /* Couleur du texte */
+  border-color: $main-dark !important; /* Couleur de la bordure */
+  border-radius: 8px; /* Arrondi global */
+}
+:host ::ng-deep .alternateBtn:hover {
+  background-color: darken($main-dark, 10%) !important; /* Couleur au survol */
+}

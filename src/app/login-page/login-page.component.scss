@@ -1,0 +1,29 @@
+#container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+#illus-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background: rgb(108, 184, 122);
+    background: linear-gradient(23deg, rgba(108, 184, 122, 1) 0%, rgba(108, 184, 122, 0.3786764705882353) 100%);
+}
+
+#illus-container img {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5%;
+    width: 90%;
+}

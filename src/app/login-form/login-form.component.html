@@ -1,0 +1,25 @@
+<div id="head-login-form">
+    <div>
+        <h1 style="color: #191A23;">Bonjour</h1>
+        <h1 style="color: #6CB87A;">Bon retour !</h1>
+    </div>
+    <img src="logo-skillmate.svg" alt="">
+</div>
+<div style="display: flex; justify-content: center;">
+    <h2>Connectez-vous</h2>
+</div>
+<div id="form-container" >
+    <p-floatlabel style="margin-bottom: 10%;">
+        <input id="username" pInputText style="width: 100%;" />
+        <label for="username">Username</label>
+    </p-floatlabel>
+    <div style="width: 100%; display: flex;text-align: end;flex-direction: column;margin-bottom: 10%;">
+        <p-floatlabel>
+            <p-password id="password" [toggleMask]="true" [style]="{'width':'100%'}" [feedback]="false"
+                [inputStyle]="{'width':'100%'}" />
+            <label for="password">Password</label>
+        </p-floatlabel>
+        <a href="#" style="color: #191A23;">mot de passe oublié ?</a>
+    </div>
+    <p-button label="Connexion" styleClass="primaryBtn"/>
+</div>
