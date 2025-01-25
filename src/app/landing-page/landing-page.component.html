@@ -8,8 +8,11 @@
                 Simple d’utilisation et super portatifs skillmate redefinie la gestions 
                 de compétences et ressources.
             </p>
-            <p-button label="Rejoindre l'avanture" size="large"/>
+            <a [routerLink]="['/auth/login']">
+                <p-button label="Rejoindre l'aventure" size="large"/>
+            </a>
         </div>
     </div>
     <img src="illus-landing.svg" alt="">
  </div>
+ <app-footer></app-footer>

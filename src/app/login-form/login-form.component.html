@@ -1,6 +1,6 @@
 <div id="head-login-form">
     <div>
-        <h1 style="color: #191A23;">Bonjour</h1>
+        <h1 style="color: #191A23;">Bonjour,</h1>
         <h1 style="color: #6CB87A;">Bon retour !</h1>
     </div>
     <img src="logo-skillmate.svg" alt="">
@@ -8,19 +8,28 @@
 <div style="display: flex; justify-content: center;">
     <h2>Connectez-vous</h2>
 </div>
-<div id="form-container" >
-    <p-floatlabel style="margin-bottom: 10%;">
-        <input id="username" pInputText style="width: 100%;" />
-        <label for="username">Username</label>
-    </p-floatlabel>
-    <div style="width: 100%; display: flex;text-align: end;flex-direction: column;margin-bottom: 10%;">
+<div id="form-container" [formGroup]="loginForm">
+    <div class="input-container">
+        <div *ngIf="loginForm.get('email')?.touched && emailError" style="color: red;">
+            {{ emailError }}
+        </div>
+        <p-floatlabel style="margin-bottom: 10%;">
+            <input id="username" pInputText style="width: 100%;" formControlName="email" />
+            <label for="username">Email</label>  
+        </p-floatlabel>
+    </div>
+    
+    <div class="input-container" style="margin-bottom: 10%;">
+        <div *ngIf="loginForm.get('password')?.touched && passwordError" style="color: red;">
+            {{ passwordError }}
+          </div>
         <p-floatlabel>
             <p-password id="password" [toggleMask]="true" [style]="{'width':'100%'}" [feedback]="false"
-                [inputStyle]="{'width':'100%'}" />
-            <label for="password">Password</label>
+                [inputStyle]="{'width':'100%'}" formControlName="password" />
+            <label for="password">Mot de passe</label>
         </p-floatlabel>
-        <a href="#" style="color: #191A23;">mot de passe oublié ?</a>
+        <a href="#" style="color: #191A23;">Mot de passe oublié ?</a>
     </div>
-    <p-button label="Connexion" styleClass="primaryBtn" [style]="{'width':'100%'}"/>
+    <p-button label="Connexion" styleClass="primaryBtn" [style]="{'width':'100%'}" (onClick)="onSubmit()"/>
     <a href="#" style="color: #191A23;">Pas encore de compte ?</a>
 </div>

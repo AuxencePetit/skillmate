@@ -18,6 +18,7 @@ h1{
     flex-direction: column;
     align-items: center;
     padding: 10%;
+    padding-top: 5%;
 }
 
 p-floatlabel{
@@ -28,4 +29,10 @@ p-button{
 }
 .primaryBtn{
     width: 100%;
+}
+.input-container{
+    width: 80%; 
+    display: flex;
+    text-align: end;
+    flex-direction: column;
 }

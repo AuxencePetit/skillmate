@@ -1,0 +1,6 @@
+<div *ngIf="userInfo">
+  <h1 *ngIf="userInfo">Bienvenue, {{ userInfo?.prenom }} {{ userInfo?.nom }}</h1>
+  <p *ngIf="userInfo">Email : {{ userInfo?.email }}</p>
+  <p *ngIf="userInfo">ID Utilisateur : {{ userInfo?.idUtilisateur }}</p>
+  <button (click)="logout()">Déconnexion</button>
+</div>
