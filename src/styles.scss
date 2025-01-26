@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
 $main-green:#6CB87A;
-$main-dark:#191A23;
+$main-dark:#3F3D56;
 $main-light:#F3F3F3;
 
 body{
@@ -10,6 +11,9 @@ body{
     font-family: "Space Grotesk", sans-serif;
     background-color: $main-light;
     color: $main-dark;
+}
+app-root{
+  width: 100%;
 }
 
 .p-button {

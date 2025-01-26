@@ -1,6 +1,54 @@
-<div *ngIf="userInfo">
-  <h1 *ngIf="userInfo">Bienvenue, {{ userInfo?.prenom }} {{ userInfo?.nom }}</h1>
-  <p *ngIf="userInfo">Email : {{ userInfo?.email }}</p>
-  <p *ngIf="userInfo">ID Utilisateur : {{ userInfo?.idUtilisateur }}</p>
-  <button (click)="logout()">Déconnexion</button>
+<div id="container">
+  <div id="sidebar">
+    <div id="sidebar-title">
+      <img src="logo-skillmate-side-text-alternate.svg" alt="logo skillmate" id="logo">
+    </div>
+    <div id="sidebar-search">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input type="text" pInputText placeholder="Search" pSize="small"/>
+      </p-iconfield>
+    </div>
+    
+    <div id="sidebar-content">
+      <!--
+      <p-button label="Tableau de bord" [routerLink]="['/dashboard']"></p-button>
+      <p-button label="Mes compétences" [routerLink]="['/skills']"></p-button>
+      <p-button label="Mes projets" [routerLink]="['/projects']"></p-button>
+      <p-button label="Mes formations" [routerLink]="['/trainings']"></p-button>
+      <p-button label="Mes expériences" [routerLink]="['/experiences']"></p-button>
+      <p-button label="Mes certifications" [routerLink]="['/certifications']"></p-button>
+      <p-button label="Mes langues" [routerLink]="['/languages']"></p-button>
+      <p-button label="Mes hobbies" [routerLink]="['/hobbies']"></p-button>
+      <p-button label="Mes contacts" [routerLink]="['/contacts']"></p-button>
+      -->
+      <div class="sidebar-button">
+        <p-button icon="pi pi-home" iconPos="top" styleClass="alternateBtn" size="large"/>
+        <p>Menu</p>
+      </div>
+      <div class="sidebar-button">
+        <p-button icon="pi pi-users" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p>Equipe</p>
+      </div>
+      <div class="sidebar-button">
+        <p-button icon="pi pi-lightbulb" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p>Compétences</p>
+      </div>
+      <div class="sidebar-button">
+        <p-button icon="pi pi-hammer" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p>Missions</p>
+      </div>
+    </div>
+  </div>
+  <div id="topbar">
+    <div>
+      <h2 style="color: #F3F3F3;">Bienvenue,</h2>
+      <h2 style="color: #6CB87A;">{{ userInfo?.prenom }} {{ userInfo?.nom }}</h2>
+    </div>
+    <div id="topbar-buttons">
+      <p-button icon="pi pi-user" (click)="goToProfile()" [rounded]="true"/>
+      <p-button icon="pi pi-sign-out" (click)="logout()" [rounded]="true" [outlined]="true"/>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
 </div>
