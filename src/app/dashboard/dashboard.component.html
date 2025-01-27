@@ -1,7 +1,20 @@
-<div *ngIf="loading" class="loading-screen">
-  <div class="spinner"></div>
-  <img src="loading-anim.gif" alt="">
-</div>
+<p-toast />
+<p-confirmdialog #cd>
+    <ng-template #headless let-message let-onAccept="onAccept" let-onReject="onReject">
+        <div class="flex flex-col items-center p-8 bg-surface-0 dark:bg-surface-900 rounded">
+            <div
+                class="rounded-full bg-primary text-primary-contrast inline-flex justify-center items-center h-24 w-24 -mt-20">
+                <i class="pi pi-question !text-5xl"></i>
+            </div>
+            <span class="font-bold text-2xl block mb-2 mt-6">{{ message.header }}</span>
+            <p class="mb-0">{{ message.message }}</p>
+            <div class="flex items-center gap-2 mt-6">
+                <p-button label="Annuler" outlined="true" (click)="onReject()" styleClass=".alternateBtn" />
+                <p-button label="Confirmer" (click)="onAccept()" styleClass="primaryBtn"/>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmdialog>
 
 <div id="container">
   <div id="sidebar">
@@ -14,33 +27,21 @@
         <input type="text" pInputText placeholder="Search" pSize="small"/>
       </p-iconfield>
     </div>
-    
     <div id="sidebar-content">
-      <!--
-      <p-button label="Tableau de bord" [routerLink]="['/dashboard']"></p-button>
-      <p-button label="Mes compétences" [routerLink]="['/skills']"></p-button>
-      <p-button label="Mes projets" [routerLink]="['/projects']"></p-button>
-      <p-button label="Mes formations" [routerLink]="['/trainings']"></p-button>
-      <p-button label="Mes expériences" [routerLink]="['/experiences']"></p-button>
-      <p-button label="Mes certifications" [routerLink]="['/certifications']"></p-button>
-      <p-button label="Mes langues" [routerLink]="['/languages']"></p-button>
-      <p-button label="Mes hobbies" [routerLink]="['/hobbies']"></p-button>
-      <p-button label="Mes contacts" [routerLink]="['/contacts']"></p-button>
-      -->
       <div class="sidebar-button">
-        <p-button icon="pi pi-home" iconPos="top" styleClass="alternateBtn" size="large"/>
+        <p-button icon="pi pi-home" iconPos="top" styleClass="alternateBtnV2" size="large"/>
         <p>Menu</p>
       </div>
       <div class="sidebar-button">
-        <p-button icon="pi pi-users" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p-button icon="pi pi-users" iconPos="top" styleClass="alternateBtnV2"size="large"/>
         <p>Equipe</p>
       </div>
       <div class="sidebar-button">
-        <p-button icon="pi pi-lightbulb" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p-button icon="pi pi-lightbulb" iconPos="top" styleClass="alternateBtnV2"size="large"/>
         <p>Compétences</p>
       </div>
       <div class="sidebar-button">
-        <p-button icon="pi pi-hammer" iconPos="top" styleClass="alternateBtn"size="large"/>
+        <p-button icon="pi pi-hammer" iconPos="top" styleClass="alternateBtnV2"size="large"/>
         <p>Missions</p>
       </div>
     </div>
@@ -52,8 +53,8 @@
     </div>
     <div id="topbar-buttons">
       <p-button icon="pi pi-user" (click)="goToProfile()" [rounded]="true" styleClass="primaryBtn"/>
-      <p-button icon="pi pi-sign-out" (click)="logout()" [rounded]="true" [outlined]="true"/>
+      <p-button icon="pi pi-sign-out" (click)="confirm()" [rounded]="true" [outlined]="true"/>
     </div>
   </div>
-  <router-outlet></router-outlet>
+  <div id="router-outlet"><router-outlet></router-outlet></div>
 </div>

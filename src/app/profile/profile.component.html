@@ -1,0 +1,44 @@
+<div id="scroll-container">
+    <div id="container">
+       <div id="header">
+            <div>
+                <img src="User-Profile.png" alt="">
+                <div style="flex-direction: column;">
+                    <h2 style="color: #6CB87A;">{{ userInfo?.prenom }}</h2>
+                    <h2 style="color: #3F3D56">{{ userInfo?.nom }}</h2>
+                    <h5 style="color: #4a4857; margin: 0;font-style: oblique;">{{ userInfo?.statut}}</h5>
+                </div>
+            </div>
+            <p-button icon="pi pi-pencil" label="modifier" styleClass="primaryBtn" size="large"/>
+       </div>
+       <hr>
+        <div id="infos">
+            <div>
+                <h3 style="color: #6CB87A;">Informations personnelles</h3>
+                <div  style="display: flex; flex-direction: row;">
+                    <div class="info-holder">
+                        <p class="info-label" style="color: #4a4857; margin: 0;">Email: </p>
+                        <p style="color: #3F3D56; margin: 0;">{{ userInfo?.email }}</p>
+                    </div>
+                    <div class="info-holder">
+                        <p class="info-label" style="color: #4a4857; margin: 0;">Age: </p>
+                        <p style="color: #3F3D56; margin: 0;">{{ age }} ans ( née le {{userInfo?.date_naissance | date: 'dd/MM/yyyy'}} )</p>
+                    </div>
+                    <div class="info-holder">
+                        <p class="info-label" style="color: #4a4857; margin: 0;">Ancieneté: </p>
+                        <p *ngIf="ancienete! > 0" style="color: #3F3D56; margin: 0;">{{ancienete}} ( embauché le {{userInfo?.date_embauche | date: 'dd/MM/yyyy'}} ) </p>
+                        <p #elseBlock style="color: #3F3D56; margin: 0;"> Votre première année ici !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="skills">
+                <h3 style="color: #6CB87A;">Compétences</h3>
+                <div class="skills-holder">
+                    <!-- <div *ngFor="let skill of userInfo?.skills" class="skill">
+                        <p>{{ skill }}</p>
+                    </div> -->
+        </div>
+    </div>
+</div>
