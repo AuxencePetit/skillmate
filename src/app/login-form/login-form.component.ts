@@ -52,6 +52,19 @@ export class LoginFormComponent {
     return null;
   }
 
+  // onSubmit(): void {
+  //   if (this.loginForm.valid) {
+  //     this.authService.login(this.loginForm.value).subscribe({
+  //       next: (response) => {
+  //         console.log('Connexion réussie, utilisateur connecté :', response.user);
+  //         this.router.navigate(['/dashboard']); // Rediriger après connexion
+  //       },
+  //       error: (err) => {
+  //         console.error('Erreur lors de la connexion :', err);
+  //       },
+  //     });
+  //   }
+  // }
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
@@ -60,9 +73,15 @@ export class LoginFormComponent {
           this.router.navigate(['/dashboard']); // Rediriger après connexion
         },
         error: (err) => {
+          if (err.status === 404) {
+            this.errorMessage = "Cette adresse email n'existe pas.";
+          } else {
+            this.errorMessage = "Une erreur est survenue. Veuillez réessayer.";
+          }
           console.error('Erreur lors de la connexion :', err);
         },
       });
     }
   }
+  
 }
