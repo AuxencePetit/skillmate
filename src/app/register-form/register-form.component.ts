@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -20,6 +21,7 @@ import { Router } from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterLink,
   ],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss',
