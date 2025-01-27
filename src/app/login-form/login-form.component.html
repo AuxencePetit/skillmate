@@ -31,5 +31,5 @@
         <a href="#" style="color: #191A23;">Mot de passe oublié ?</a>
     </div>
     <p-button label="Connexion" styleClass="primaryBtn" [style]="{'width':'100%'}" (onClick)="onSubmit()"/>
-    <a href="#" style="color: #191A23;">Pas encore de compte ?</a>
+    <a [routerLink]="['/auth/register']" style="color: #191A23;">Pas encore de compte ?</a>
 </div>

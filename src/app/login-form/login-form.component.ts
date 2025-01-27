@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +19,7 @@ import { Router } from '@angular/router';
     , ButtonModule
     , CommonModule
     , ReactiveFormsModule
-    , HttpClientModule],
+    , HttpClientModule,RouterLink],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
   providers: [AuthService]

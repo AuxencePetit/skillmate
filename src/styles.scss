@@ -59,3 +59,21 @@ app-root{
 :host ::ng-deep .alternateBtn:hover {
   background-color: darken($main-dark, 10%) !important; /* Couleur au survol */
 }
+
+:host ::ng-deep .alternateBtnV2 {
+  background-color: $main-dark !important; /* Couleur de fond personnalisée */
+  color: $main-light !important; /* Couleur du texte */
+  border-color: $main-dark !important; /* Couleur de la bordure */
+  border-radius: 8px; /* Arrondi global */
+}
+:host ::ng-deep .alternateBtnV2:hover {
+  background-color: darken($main-dark, 10%) !important; /* Couleur au survol */
+}
+:host ::ng-deep .p-button-outlined{
+  border-color: $main-green !important;
+  color: $main-green !important;
+}
+:host ::ng-deep .p-button-outlined:hover{
+  transition: background-color 1s;
+  background-color: $main-light !important;
+}

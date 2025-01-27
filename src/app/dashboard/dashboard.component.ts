@@ -15,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class DashboardComponent implements OnInit {
   userInfo: { idUtilisateur: number; nom: string; prenom: string; email: string } | null = null;
+  loading = false;
 
   constructor(private sessionService: SessionService, private router: Router) {}
 
@@ -28,8 +29,13 @@ export class DashboardComponent implements OnInit {
     //this.router.navigate(['profile']);
   }
   logout(): void {
-    this.sessionService.clearSession();
-    this.router.navigate(['auth/login']);
+    this.loading = true;
+    setTimeout(() => {
+      this.sessionService.clearSession();
+      this.loading = false;
+      this.router.navigate(['auth/login']);
+    }, 2000);
+    
   }
 }
 

@@ -1,3 +1,8 @@
+<div *ngIf="loading" class="loading-screen">
+  <div class="spinner"></div>
+  <img src="loading-anim.gif" alt="">
+</div>
+
 <div id="container">
   <div id="sidebar">
     <div id="sidebar-title">
@@ -46,7 +51,7 @@
       <h2 style="color: #6CB87A;">{{ userInfo?.prenom }} {{ userInfo?.nom }}</h2>
     </div>
     <div id="topbar-buttons">
-      <p-button icon="pi pi-user" (click)="goToProfile()" [rounded]="true"/>
+      <p-button icon="pi pi-user" (click)="goToProfile()" [rounded]="true" styleClass="primaryBtn"/>
       <p-button icon="pi pi-sign-out" (click)="logout()" [rounded]="true" [outlined]="true"/>
     </div>
   </div>

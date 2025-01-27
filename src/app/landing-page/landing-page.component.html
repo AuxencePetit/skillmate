@@ -1,4 +1,12 @@
- <div id="container">
+ <div id="header">
+        <img src="logo-skillmate-side-text.svg" alt="">
+        <div>
+            <a [routerLink]="['/auth/login']">
+                <p-button icon="pi pi-user" label="connexion" styleClass="primaryBtn" size="large"/>
+            </a>
+        </div>
+</div>
+<div id="container">
     <div id="text">
         <h1 style="margin: 0;">Manager les compétences de son entreprise</h1>
         <div>
@@ -8,8 +16,8 @@
                 Simple d’utilisation et super portatifs skillmate redefinie la gestions 
                 de compétences et ressources.
             </p>
-            <a [routerLink]="['/auth/login']">
-                <p-button label="Rejoindre l'aventure" size="large"/>
+            <a [routerLink]="['/auth/register']">
+                <p-button label="Rejoindre l'aventure" size="large" styleClass="alternateBtnV2"/>
             </a>
         </div>
     </div>

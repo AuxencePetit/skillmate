@@ -5,6 +5,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -12,7 +13,8 @@ export const routes: Routes = [
     path: 'auth',
     component: LoginPageComponent,
     children: [
-      { path: 'login', component: LoginFormComponent }
+      { path: 'login', component: LoginFormComponent },
+      { path: 'register', component: RegisterFormComponent },
     ],
   },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
