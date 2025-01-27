@@ -17,7 +17,6 @@ export class AuthService {
       this.http.post(`${this.apiUrl}/auth/login`, credentials).subscribe({
         next: (response: any) => {
           if (response.success) {
-            // Sauvegarde de la session utilisateur
             this.sessionService.saveSession(response.user);
             observer.next(response);
           } else {
@@ -25,6 +24,28 @@ export class AuthService {
           }
         },
         error: (err) => observer.error(err),
+      });
+    });
+  }
+
+  register(user: {
+    prenom: string;
+    nom: string;
+    email: string;
+    password: string;
+    date_naissance: string;
+  }): Observable<any> {
+    return new Observable((observer) => {
+      this.http.post(`${this.apiUrl}/auth/register`, user).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.sessionService.saveSession(response.user);
+            observer.next(response);
+          } else {
+            observer.error('Échec de l\'inscription.');
+          }
+        },
+        error: (err: any) => observer.error(err),
       });
     });
   }

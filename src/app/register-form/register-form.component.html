@@ -1,1 +1,76 @@
-<p>register-form works!</p>
+<div id="head-login-form">
+    <div>
+        <h1 style="color: #191A23;">Bonjour,</h1>
+        <h1 style="color: #6CB87A;">Rejoignez-nous !</h1>
+    </div>
+    <img src="logo-skillmate.svg" alt="">
+</div>
+<div style="display: flex; justify-content: center;">
+    <h2>Inscrivez-vous</h2>
+</div>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="divFormulaire">
+    <div class="input-container">
+        <div *ngIf="registerForm.get('nom')?.touched && lastNameError" style="color: red;">
+            {{ lastNameError }}
+        </div>
+        <p-floatlabel style="margin-bottom: 10%;">
+            <input id="nom" pInputText style="width: 100%;" formControlName="nom" />
+            <label for="nom">Nom</label>
+        </p-floatlabel>
+    </div>
+    
+    <div class="input-container">
+        <div *ngIf="registerForm.get('prenom')?.touched && firstNameError" style="color: red;">
+            {{ firstNameError }}
+        </div>
+        <p-floatlabel style="margin-bottom: 10%;">
+            <input id="prenom" pInputText style="width: 100%;" formControlName="prenom" />
+            <label for="prenom">Prénom</label>
+        </p-floatlabel>
+    </div>
+    
+    <div class="input-container">
+        <div *ngIf="registerForm.get('email')?.touched && emailError" style="color: red;">
+            {{ emailError }}
+        </div>
+        <p-floatlabel style="margin-bottom: 10%;">
+            <input id="email" pInputText style="width: 100%;" formControlName="email" />
+            <label for="email">Email</label>
+        </p-floatlabel>
+    </div>
+    
+    <div class="input-container" style="margin-bottom: 10%;">
+        <div *ngIf="registerForm.get('password')?.touched && passwordError" style="color: red;">
+            {{ passwordError }}
+        </div>
+        <p-floatlabel>
+            <p-password id="password" [toggleMask]="true" [style]="{'width':'100%'}" 
+                [inputStyle]="{'width':'100%'}" formControlName="password" />
+            <label for="password">Mot de passe</label>
+        </p-floatlabel>
+    </div>
+
+    <div class="input-container" style="margin-bottom: 10%;"> 
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && confirmPasswordError" style="color: red;">
+            {{ confirmPasswordError }}
+        </div>
+        <p-floatlabel>
+            <p-password id="confirmPassword" [toggleMask]="true" [style]="{'width':'100%'}" 
+                [inputStyle]="{'width':'100%'}" formControlName="confirmPassword" />
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+        </p-floatlabel>
+    </div>
+    
+    <div class="input-container" style="margin-bottom: 20px;">
+        <div *ngIf="registerForm.get('date_naissance')?.touched && date_naissanceError" style="color: red;">
+            {{ date_naissanceError }}
+        </div>
+        <p-floatlabel>
+            <input id="date_naissance" pInputText type="date" style="width: 100%;" formControlName="date_naissance" />
+        </p-floatlabel>
+    </div>
+    
+    
+    <p-button label="Inscription" styleClass="primaryBtn" [style]="{'width':'100%'}" type="submit"></p-button>
+</form>

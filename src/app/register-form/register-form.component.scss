@@ -1,0 +1,52 @@
+@import "../../styles.scss";
+
+#head-login-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10%;
+}
+#head-login-form img {
+  width: 20%;
+}
+h1 {
+  margin: 0;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10%;
+  padding-top: 5%;
+}
+
+p-floatlabel {
+  width: 100%;
+}
+p-button {
+  width: 80%;
+}
+.primaryBtn {
+  width: 100%;
+}
+.input-container {
+  width: 80%;
+  display: flex;
+  text-align: end;
+  flex-direction: column;
+}
+
+.dateDeNaissance {
+  margin-bottom: 3em;
+}
+
+.divFormulaire {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+}
