@@ -35,16 +35,17 @@
       {{ passwordError }}
     </div>
     <p-floatlabel>
-        <p-password 
-        id="password" 
-        [toggleMask]="true" 
-        [style]="{'width':'100%'}" 
-        [feedback]="false" 
-        [inputStyle]="{'width':'100%'}" 
-        formControlName="password" 
-        (keyup.enter)="onSubmit()">
+      <p-password
+        id="password"
+        [toggleMask]="true"
+        [style]="{ width: '100%' }"
+        [feedback]="false"
+        [inputStyle]="{ width: '100%' }"
+        formControlName="password"
+        (keyup.enter)="onSubmit()"
+      >
       </p-password>
-      
+
       <label for="password">Mot de passe</label>
     </p-floatlabel>
     <a href="#" style="color: #191a23">Mot de passe oublié ?</a>

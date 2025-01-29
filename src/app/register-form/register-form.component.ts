@@ -114,7 +114,7 @@ export class RegisterFormComponent {
         email,
         password,
         date_naissance,
-        statut: 'Employé',
+        statut: 'Employé',//ici
         date_embauche: new Date().toISOString().split('T')[0],
       };
   
