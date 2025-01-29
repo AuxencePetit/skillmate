@@ -6,6 +6,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -17,8 +18,11 @@ export const routes: Routes = [
       { path: 'register', component: RegisterFormComponent },
     ],
   },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'profile', component: ProfileComponent},
+    ]
+   },
 ];
 
 @NgModule({

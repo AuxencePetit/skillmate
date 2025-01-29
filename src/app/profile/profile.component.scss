@@ -1,0 +1,64 @@
+@import '../../styles.scss';
+
+#scroll-container{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    background-color: darken($color: $main-light, $amount: 10%);
+    color: $main-light;
+    border-radius: 20px;
+}
+#header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    margin: 2%;
+}
+#header div{
+    display: flex;
+    height: 100%;
+}
+#header div img{
+    height: 120px;
+    background-color: $main-green;
+    border-radius: 20px;
+    margin-right: 1em;
+}
+#header div h2{
+    margin: 0;
+}
+hr{
+    width: 96%;
+    margin: 0 auto;
+    border: 1px solid $main-light;
+}
+#infos{
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    margin: 2%;
+}
+.info-holder{
+    display: flex; 
+    flex-direction: column;
+    margin: 1%;
+    justify-content: space-between;
+    width: 100%;
+}
+.info-holder .info-label{
+    font-weight: bold;
+    margin: 0;
+}
+#skills{
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    margin: 2%;
+}

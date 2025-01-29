@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+
 $main-green:#6CB87A;
 $main-dark:#3F3D56;
 $main-light:#F3F3F3;
@@ -15,16 +17,13 @@ body{
 app-root{
   width: 100%;
 }
-
-.p-button {
-    background-color: #af4c4c; /* Remplacez par votre couleur */
-    border-color: #af5c4c; /* Assurez une bordure cohérente */
-    color: white; /* Couleur du texte */
-}
   
 .p-button-primary:hover {
   background-color: #a04545; /* Couleur au survol */
 }
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 /* width */
 ::-webkit-scrollbar {
   width: 0.5em;
@@ -70,10 +69,37 @@ app-root{
   background-color: darken($main-dark, 10%) !important; /* Couleur au survol */
 }
 :host ::ng-deep .p-button-outlined{
+  background-color: $main-light !important;
   border-color: $main-green !important;
   color: $main-green !important;
 }
 :host ::ng-deep .p-button-outlined:hover{
-  transition: background-color 1s;
-  background-color: $main-light !important;
+  background-color: darken($color: $main-light, $amount: 30%);
+  color: $main-light !important;
+}
+.bg-primary{
+  background-color: $main-green;
+}
+.bg-secondary{
+  background-color: $main-dark;
+}
+:root .p-button {
+  background-color: $main-green !important; /* Couleur de fond personnalisée */
+  color: $main-light !important; /* Couleur du texte */
+  border-color: $main-green !important; /* Couleur de la bordure */
+  border-radius: 8px; /* Arrondi global */
+}
+:root .p-button:hover {
+  background-color: darken($main-green, 10%) !important; /* Couleur au survol */
+}
+
+:root .p-button-outlined {
+  background-color: $main-light !important; 
+  border-radius: 8px; 
+  border-color: $main-green !important;
+  color: $main-green !important;
+}
+:root .p-button-outlined:hover {
+  background-color: darken($color: $main-light, $amount: 30%);
+  color: $main-light !important;
 }
