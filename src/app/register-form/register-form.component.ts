@@ -115,7 +115,7 @@ export class RegisterFormComponent {
         statut: 'Employé',
         date_embauche: new Date().toISOString().split('T')[0],
       };
-
+      console.log('Envoi du formulaire d\'inscription :', userToRegister);
       this.authService.register(userToRegister).subscribe({
         next: (response) => {
           console.log('Inscription réussie, utilisateur créé :', response.user);

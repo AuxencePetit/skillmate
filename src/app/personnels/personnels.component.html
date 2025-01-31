@@ -1,0 +1,24 @@
+<div id="header-bar">
+    <div id="search-bar">
+        <p-iconfield>
+            <p-inputicon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Rechercher un personnel" [(ngModel)]="search" (input)="searchPersonnel()"/>
+        </p-iconfield>
+    </div>
+</div>
+
+<div id="container">
+    <div *ngFor="let perso of filteredPersonnels" class="personnel-container" (click)="onSelect(perso.idUtilisateur)">
+        <div>
+            <p-avatar image="User-Profile.png" class="mr-2" size="xlarge" shape="circle" />
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <div class="header">
+                <h1>{{ perso.nom }} {{ perso.prenom }}</h1>
+            </div>
+            <div class="comp-container">
+                <p-tag *ngFor="let comp of perso.competences" class="{{comp.idCategorie}}" value="{{ comp.idComp }}" />
+            </div>
+        </div>
+    </div>
+</div>
