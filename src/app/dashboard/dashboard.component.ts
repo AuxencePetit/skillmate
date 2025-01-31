@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   goToProfile(): void {
-    this.router.navigate(['dashboard/profile']);
+    this.router.navigate(['dashboard/profile', this.userInfo?.idUtilisateur]);
   }
   logout(): void {
     this.sessionService.clearSession();
@@ -44,6 +44,10 @@ export class DashboardComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => this.logout()
     });
+  }
+  
+  goToPersonnels(): void {
+    this.router.navigate(['dashboard/personnels']);
   }
 }
 
