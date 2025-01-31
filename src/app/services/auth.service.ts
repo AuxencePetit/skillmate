@@ -38,7 +38,8 @@ export class AuthService {
     return new Observable((observer) => {
       this.http.post(`${this.apiUrl}/auth/register`, user).subscribe({
         next: (response: any) => {
-          if (response.success) {
+          console.log('Réponse API:', response); // 🔍 Ajoute un log pour vérifier la réponse
+          if (response.user) { // ✅ Vérifie la présence de `user`
             this.sessionService.saveSession(response.user);
             observer.next(response);
           } else {
@@ -54,4 +55,9 @@ export class AuthService {
   logout(): void {
     this.sessionService.clearSession();
   }
+
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/personnel/${id}`);
+  }
+
 }

@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
   // Sauvegarde des informations utilisateur
-  saveSession(user: { idUtilisateur: number; nom: string; prenom: string; email: string; statut: string; date_embauche: string; date_naissance: string }): void {
+  saveSession(user: { idUtilisateur: number; nom: string; prenom: string; email: string; statut_personnel: string; date_embauche: string; date_naissance: string }): void {
     console.log(user);
     localStorage.setItem('idUtilisateur', user.idUtilisateur.toString());
     localStorage.setItem('nom', user.nom);
     localStorage.setItem('prenom', user.prenom);
     localStorage.setItem('email', user.email);
-    localStorage.setItem('statut', user.statut);
+    localStorage.setItem('statut_personnel', user.statut_personnel);
     localStorage.setItem('date_embauche', user.date_embauche);
     localStorage.setItem('date_naissance', user.date_naissance);
     console.log(localStorage);
@@ -24,7 +24,7 @@ export class SessionService {
   }
 
   // Récupération des informations utilisateur
-  getUserInfo(): { idUtilisateur: number; nom: string; prenom: string; email: string; statut: string; date_embauche: Date; date_naissance: Date } | null {
+  getUserInfo(): { idUtilisateur: number; nom: string; prenom: string; email: string; statut_personnel: string; date_embauche: Date; date_naissance: Date } | null {
     const id = this.getUserId();
     if (!id) return null;
     return {
@@ -32,7 +32,7 @@ export class SessionService {
       nom: localStorage.getItem('nom') || '',
       prenom: localStorage.getItem('prenom') || '',
       email: localStorage.getItem('email') || '',
-      statut: localStorage.getItem('statut') || '',
+      statut_personnel: localStorage.getItem('statut_personnel') || '',
       date_embauche: new Date(localStorage.getItem('date_embauche') || ''),
       date_naissance: new Date(localStorage.getItem('date_naissance') || ''),
     };
@@ -44,11 +44,13 @@ export class SessionService {
     localStorage.removeItem('nom');
     localStorage.removeItem('prenom');
     localStorage.removeItem('email');
-    localStorage.removeItem('statut');
+    localStorage.removeItem('statut_personnel');
     localStorage.removeItem('date_embauche');
     localStorage.removeItem('date_naissance');
     localStorage.removeItem('dateEmbauche');
     localStorage.removeItem('dateNaissance');
+    localStorage.removeItem('statut');
+    localStorage.removeItem('statut_personnel_personnel');
   }
 
   // Vérification si un utilisateur est connecté

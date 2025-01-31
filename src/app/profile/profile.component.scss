@@ -1,10 +1,5 @@
 @import '../../styles.scss';
 
-#scroll-container{
-    height: 100%;
-    width: 100%;
-    overflow: scroll;
-}
 #container{
     display: flex;
     flex-direction: column;
@@ -57,8 +52,15 @@ hr{
     margin: 0;
 }
 #skills{
-    display: flex;
+    display: block;
     flex-direction: column;
     height: 20%;
     margin: 2%;
+}
+.comp-holder{
+    display: block;
+    width: 100%;
+}
+p-chip{
+    margin: 0.5em;
 }

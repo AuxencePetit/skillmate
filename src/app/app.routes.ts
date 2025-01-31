@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PersonnelsComponent } from './personnels/personnels.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -20,7 +21,8 @@ export const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/:id', component: ProfileComponent},
+      {path: 'personnels', component: PersonnelsComponent}
     ]
    },
 ];

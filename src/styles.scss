@@ -100,6 +100,26 @@ app-root{
   color: $main-green !important;
 }
 :root .p-button-outlined:hover {
-  background-color: darken($color: $main-light, $amount: 30%);
+  background-color: darken($color: $main-light, $amount: 30%); 
   color: $main-light !important;
+}
+.A{
+  background-color: #007bff; /* Bleu */
+  color: white;
+}
+.B{
+  background-color: #000000; /* Vert */
+  color: white;
+}
+.C{
+  background-color: #fd7e14; /* Orange */
+  color: white;
+}
+.D{
+  background-color: #6f42c1; /* Violet */
+  color: white;
+}
+.E{
+  background-color: #dc3545; /* Rouge */
+  color: white;
 }
