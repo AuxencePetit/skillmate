@@ -30,6 +30,8 @@ import { RouterLink } from '@angular/router';
 export class RegisterFormComponent {
   registerForm!: FormGroup;
   errorMessage: string | null = null;
+  successMessage: string | null = null;
+
 
   constructor(
     private fb: FormBuilder,
@@ -105,28 +107,32 @@ export class RegisterFormComponent {
     if (this.registerForm.valid) {
       const { prenom, nom, email, password, date_naissance } =
         this.registerForm.value;
-
+  
       const userToRegister = {
         prenom,
         nom,
         email,
         password,
         date_naissance,
-        statut: 'Employé',
+        statut: 'Employé',//ici
         date_embauche: new Date().toISOString().split('T')[0],
       };
-      console.log('Envoi du formulaire d\'inscription :', userToRegister);
+  
       this.authService.register(userToRegister).subscribe({
         next: (response) => {
-          console.log('Inscription réussie, utilisateur créé :', response.user);
-          this.router.navigate(['/auth/login']);
+          console.log('Inscription réussie :', response);
+          this.successMessage = 'Votre compte a été créé avec succès !';
+          setTimeout(() => this.router.navigate(['/auth/login']), 2000);
         },
         error: (err) => {
-          console.error("Erreur lors de l'inscription :", err);
+          console.error('Erreur lors de l’inscription :', err);
+          this.successMessage = null;
         },
       });
+      
     } else {
       console.log('Formulaire invalide');
     }
   }
+  
 }

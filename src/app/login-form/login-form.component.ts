@@ -13,24 +13,29 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
-  imports: [PasswordModule
-    , FloatLabelModule
-    , InputTextModule
-    , ButtonModule
-    , CommonModule
-    , ReactiveFormsModule
-    , HttpClientModule,RouterLink],
+  imports: [
+    PasswordModule,
+    FloatLabelModule,
+    InputTextModule,
+    ButtonModule,
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterLink,
+  ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class LoginFormComponent {
-
   loginForm!: FormGroup;
   errorMessage: string | null = null;
 
-  
-  constructor(private fb: FormBuilder, private authService: AuthService,private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -41,8 +46,8 @@ export class LoginFormComponent {
 
   get emailError(): string | null {
     const email = this.loginForm.get('email');
-    if (email?.hasError('required')) return 'L\'email est requis.';
-    if (email?.hasError('email')) return 'L\'email n\'est pas valide.';
+    if (email?.hasError('required')) return "L'email est requis.";
+    if (email?.hasError('email')) return "L'email n'est pas valide.";
     return null;
   }
 
@@ -56,10 +61,18 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          console.log('Connexion réussie, utilisateur connecté :', response.user);
+          console.log(
+            'Connexion réussie, utilisateur connecté :',
+            response.user
+          );
           this.router.navigate(['/dashboard']); // Rediriger après connexion
         },
         error: (err) => {
+          if (err.status === 404) {
+            this.errorMessage = "Cette adresse email n'existe pas.";
+          } else {
+            this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+          }
           console.error('Erreur lors de la connexion :', err);
         },
       });

@@ -36,6 +36,7 @@ p-button {
   display: flex;
   text-align: end;
   flex-direction: column;
+  margin : 2%;
 }
 
 .dateDeNaissance {
@@ -50,4 +51,8 @@ p-button {
   justify-content: center;
   width: 80%;
   height: auto;
+}
+
+.bouttonDejaCompte{
+  margin-bottom: 2em;
 }

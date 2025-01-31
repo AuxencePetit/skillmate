@@ -71,6 +71,10 @@
     </div>
 
 
-    <p-button label="Inscription" styleClass="primaryBtn" [style]="{'width':'100%'}" type="submit"></p-button>
-    <a [routerLink]="['/auth/login']" style="color: #191A23;">Déjà un compte ?</a>
+    <p-button label="Inscription" styleClass="primaryBtn" [style]="{'width':'100%'}" type="submit" class="bouttonDejaCompte"></p-button>
+    <a [routerLink]="['/auth/login']" style="color: #191A23;" >Déjà un compte ?</a>
 </form>
+<div *ngIf="successMessage" style="color: green; text-align: center; margin-bottom: 20px;">
+    {{ successMessage }}
+  </div>
+  
