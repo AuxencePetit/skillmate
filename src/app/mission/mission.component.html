@@ -1,0 +1,11 @@
+<div *ngIf="this.userInfo!.statut_personnel === 'admin'">
+    <app-mission-admin-view></app-mission-admin-view>
+</div>
+
+<div *ngIf="this.userInfo!.statut_personnel === 'chef_projet'">
+    <app-mission-chef-projet-view></app-mission-chef-projet-view>
+</div>
+
+<div *ngIf="this.userInfo!.statut_personnel === 'employe'">
+    <app-mission-employe-view ></app-mission-employe-view>
+</div>
