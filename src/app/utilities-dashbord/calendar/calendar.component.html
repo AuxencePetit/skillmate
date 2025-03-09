@@ -1,0 +1,14 @@
+<div class="calendar-widget">
+  <h3>Semaine actuelle</h3>
+  <div class="calendar-days">
+    <div class="calendar-day"
+         *ngFor="let date of weekDates"
+         [ngClass]="{
+           'current-day': isCurrentDay(date),
+           'past-day': isPastDay(date)
+         }">
+      <div class="date">{{ date | date: 'd' }}</div>
+      <div class="day">{{ daysOfWeek[weekDates.indexOf(date)] }}</div>
+    </div>
+  </div>
+</div>

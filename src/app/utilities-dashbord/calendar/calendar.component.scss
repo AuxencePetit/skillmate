@@ -1,0 +1,51 @@
+@import '../../../styles.scss';
+
+.calendar-widget {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 15em;
+  }
+  
+  h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .calendar-day {
+    text-align: center;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+  
+  .calendar-day .date {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .calendar-day .day {
+    font-size: 12px;
+    color: #666;
+  }
+  .current-day {
+    background-color: $main-green;  /* Applique le fond vert sur le jour actuel */
+    color: white;
+  }
+  .current-day .day {
+    color: white;  /* Couleur de texte normale */
+  }
+  
+  .past-day {
+    background-color: $main-light;  /* Gris pour les jours passés */
+    color: #aaa;  /* Gris clair pour le texte */
+    pointer-events: none;  /* Désactive les interactions si nécessaire */
+  }
