@@ -9,6 +9,9 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PersonnelsComponent } from './personnels/personnels.component';
 import { MissionComponent } from './mission/mission.component';
+import { DashboardNewsComponent } from './dashboard-news/dashboard-news.component';
+import { CalendarComponent } from './utilities-dashbord/calendar/calendar.component';
+import { DonutChartComponent } from './utilities-dashbord/donut-chart/donut-chart.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -22,11 +25,12 @@ export const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
+      {path: '', component: DashboardNewsComponent},
       {path: 'profile/:id', component: ProfileComponent},
       {path: 'personnels', component: PersonnelsComponent},
       {path: 'mission', component: MissionComponent}
     ]
-   },
+   }
 ];
 
 @NgModule({

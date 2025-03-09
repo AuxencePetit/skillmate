@@ -26,8 +26,10 @@ export class MissionAdminViewComponent {
   }
   toggleCreateMission(){
     let container = document.getElementById('create-mission-from');
+    let button = document.getElementById('create-mission-button');
     if(container?.style.display === 'none'){
       container.style.display = 'block';
+
     } else {
       container!.style.display = 'none';
     }

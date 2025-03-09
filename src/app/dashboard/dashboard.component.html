@@ -21,15 +21,17 @@
     <div id="sidebar-title">
       <img src="logo-skillmate-side-text-alternate.svg" alt="logo skillmate" id="logo">
     </div>
+    <!--
     <div id="sidebar-search">
       <p-iconfield>
         <p-inputicon styleClass="pi pi-search" />
         <input type="text" pInputText placeholder="Search" pSize="small"/>
       </p-iconfield>
     </div>
+    -->
     <div id="sidebar-content">
       <div class="sidebar-button">
-        <p-button icon="pi pi-home" iconPos="top" styleClass="alternateBtnV2" size="large"/>
+        <p-button icon="pi pi-home" iconPos="top" styleClass="alternateBtnV2" size="large" (click)="goToDashboard()"/>
         <p>Menu</p>
       </div> 
       <div class="sidebar-button">

@@ -1,0 +1,46 @@
+@import '../../styles.scss';
+
+#grid-draggable {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    min-height: 400px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+/* Animation pendant le drag */
+.cdk-drag-preview {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+/* Gestion des tailles */
+.grid-item.grid-size1 {
+    aspect-ratio: 1;
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item.grid-size2 {
+    grid-row: span 1;
+    grid-column: span 2;
+}
+
+.grid-item.grid-size3 {
+    aspect-ratio: 1;
+    grid-row: span 2;
+    grid-column: span 2;
+    /* 2 cases de hauteur et de longueur */
+}

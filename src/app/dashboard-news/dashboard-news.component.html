@@ -1,0 +1,11 @@
+<div cdkDropList id="grid-draggable" (cdkDropListDropped)="drop($event)">
+    <div class="grid-item grid-size{{widget.size}}" *ngFor="let widget of widgets" cdkDrag>
+      <ng-container [ngSwitch]="widget.component">
+        <app-clock *ngSwitchCase="'clock'"></app-clock>
+        <app-calendar *ngSwitchCase="'calendar'"></app-calendar> <!-- Calendrier avec taille modifiée -->
+        <app-donut-chart *ngSwitchCase="'stats'"></app-donut-chart>
+        <p *ngSwitchCase="'tasks'">✅ Tâches</p>
+      </ng-container>
+    </div>
+  </div>
+  
