@@ -49,5 +49,8 @@ export class DashboardComponent implements OnInit {
   goToPersonnels(): void {
     this.router.navigate(['dashboard/personnels']);
   }
+  goToMission(): void {
+    this.router.navigate(['dashboard/mission']);
+  }
 }
 
