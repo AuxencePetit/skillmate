@@ -1,0 +1,30 @@
+.donut-chart-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15em;  // Largeur de 15em
+    height: 15em; // Hauteur de 15em
+    max-width: 15em;
+    max-height: 15em;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  h3 {
+    margin: 0;
+    padding: 0.5em;
+    font-size: 1.2em;
+  }
+  
+  .donut-chart-widget p-chart {
+    width: 80%;
+    height: 90%;
+  }
+  
+  .donut-chart-widget p-chart canvas {
+    width: 80% !important;
+    height: 90% !important;
+  }
+  
