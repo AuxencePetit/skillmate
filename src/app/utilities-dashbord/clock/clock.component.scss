@@ -1,0 +1,79 @@
+@import '../../../styles.scss';
+
+#clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $main-green;
+    width: fit-content;
+    padding: 1%;
+    border-radius: 10px;
+    aspect-ratio: 1;
+}
+
+.clock {
+    border-radius: 50%;
+    background: #fff url('/ios_clock.svg') no-repeat center;
+    background-size: 88%;
+    height: 15em;
+    position: relative;
+    width: 15em;
+}
+
+.clock::after {
+    background: #ff0000;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 5%;
+    height: 5%;
+    z-index: 10;
+}
+
+.minutes-container,
+.hours-container,
+.seconds-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.hours,
+.minutes,
+.seconds {
+    position: absolute;
+    background: #000;
+    transform-origin: 50% 100%;
+    border-radius: 3px;
+}
+
+.seconds {
+    background: #ff0000;
+}
+
+.hours {
+    height: 20%;
+    width: 2.5%;
+    left: 48.75%;
+    top: 30%;
+}
+
+.minutes {
+    height: 40%;
+    width: 2%;
+    left: 49%;
+    top: 10%;
+}
+
+.seconds {
+    height: 45%;
+    width: 1%;
+    left: 49.5%;
+    top: 14%;
+    z-index: 8;
+}

@@ -1,0 +1,13 @@
+<div id="clock-container" class="grid-item">
+    <article class="clock">
+        <div class="hours-container" [style.transform]="'rotateZ(' + hourAngle + 'deg)'">
+        <div class="hours"></div>
+        </div>
+        <div class="minutes-container" [style.transform]="'rotateZ(' + minuteAngle + 'deg)'">
+        <div class="minutes"></div>
+        </div>
+        <div class="seconds-container" [style.transform]="'rotateZ(' + secondAngle + 'deg)'">
+        <div class="seconds"></div>
+        </div>
+    </article>
+</div>
