@@ -26,6 +26,11 @@ export class PersonnelService {
     return this.http.put(`${this.apiUrl}/${id}`, personnel);
   }
 
+  updatePersonnelRole(id: number, role: string) {
+    return this.http.put(`${this.apiUrl}/${id}/role`, {role
+    });
+  }
+
   deletePersonnel(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
