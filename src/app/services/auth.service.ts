@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   getUserById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/personnel/${id}`);
+    return this.http.get(`${this.apiUrl}/personnel/unique/${id}`);
   }
 
 }

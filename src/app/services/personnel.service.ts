@@ -15,7 +15,7 @@ export class PersonnelService {
   }
 
   getPersonnelById(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.apiUrl}/unique/${id}`);
   }
 
   addPersonnel(personnel: any) {
