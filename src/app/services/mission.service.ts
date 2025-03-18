@@ -24,8 +24,17 @@ export class MissionService {
     return this.http.get<Mission>(`${this.apiUrl}/${id}`);
   }
 
-  createMission(mission: Mission): Observable<Mission> {
-    return this.http.post<Mission>(this.apiUrl, mission);
+  // createMission(mission: Mission): Observable<Mission> {
+  //   return this.http.post<Mission>(this.apiUrl, mission);
+  // }
+   // Créer une nouvelle mission
+   createMission(mission: {
+    nom_mission: string;
+    description: string;
+    date_debut: string;
+    duree: number;
+  }): Observable<any> {
+    return this.http.post(this.apiUrl, mission);
   }
 
   updateMission(mission: Mission): Observable<Mission> {
@@ -41,5 +50,7 @@ export class MissionService {
     this.personnelService.updatePersonnelRole(idUtilisateur, role);
 
   }
+
+  
 
 }
