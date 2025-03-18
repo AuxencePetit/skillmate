@@ -10,11 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class MissionService {
 
-
   constructor(private http: HttpClient, private personnelService: PersonnelService) { }
   
-  private apiUrl = 'http://localhost:3000/missions'; // Ajuste selon ton API
-
+  private apiUrl = 'http://localhost:3000/missions'; 
   
   getMissions(): Observable<Mission[]> {
     return this.http.get<Mission[]>(this.apiUrl);

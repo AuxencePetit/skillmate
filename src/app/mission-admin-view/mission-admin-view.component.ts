@@ -6,34 +6,28 @@ import { CreateMissionComponent } from '../create-mission/create-mission.compone
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { SelectModule } from 'primeng/select';
-import { FormsModule } from '@angular/forms'; // Importer FormsModule
+import { FormsModule } from '@angular/forms';
+import { MissionModalComponent } from "../core/modale/mission-modal/mission-modal.component"; // Importer FormsModule
 
 @Component({
   selector: 'app-mission-admin-view',
-  imports: [ButtonModule, CreateMissionComponent, TableModule, TagModule, SelectModule, FormsModule], // Ajouter DropdownModule et FormsModule aux imports
+  imports: [ButtonModule, TableModule, TagModule, SelectModule, FormsModule, MissionModalComponent],
   templateUrl: './mission-admin-view.component.html',
-  styleUrl: './mission-admin-view.component.scss'
-})
-export class MissionAdminViewComponent {
+  styleUrls: ['./mission-admin-view.component.scss']
+})export class MissionAdminViewComponent {
   missions?: Mission[];
   statuses: string[] = ['En préparation', 'Planifiée', 'En cours', 'Terminé'];
   selectedStatus: string | null = null;
+  isModalVisible: boolean = false;
 
   constructor(private missionService: MissionService) {
     this.missionService.getMissions().subscribe((missions: Mission[]) => {
       this.missions = missions;
     });
   }
-  toggleCreateMission(){
-    let container = document.getElementById('create-mission-from');
-    let button = document.getElementById('create-mission-button');
-    if(container?.style.display === 'none'){
-      container.style.display = 'block';
 
-    } else {
-      container!.style.display = 'none';
-    }
-
+  openModal() {
+    this.isModalVisible = true; // Définit la variable pour afficher la modal
   }
 
   getSeverity(status: string): 'success' | 'info' | 'warn' | 'danger' {
@@ -52,7 +46,7 @@ export class MissionAdminViewComponent {
   }
 
   // Fonction de filtrage avec un champ typé
-  filter(value: string, field: keyof Mission) {  // 'field' doit être une clé de Mission
+  filter(value: string, field: keyof Mission) {  
     if (value) {
       this.missions = this.missions!.filter(mission => mission[field] === value);
     } else {
@@ -62,3 +56,4 @@ export class MissionAdminViewComponent {
     }
   }
 }
+
