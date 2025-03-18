@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-//import ce qui permet
+import { FormsModule } from '@angular/forms';
+
 import { CompetenceService } from '../services/competence.service';
 import { CategoriesService } from '../services/categories.service';
 import { Competence } from '../models/personnel.model';
@@ -7,17 +8,18 @@ import { Categorie } from '../models/personnel.model';
 import { TableModule } from 'primeng/table';
 import { SelectModule } from 'primeng/select';
 import { TagModule } from 'primeng/tag';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-competences-list',
-  imports: [TableModule, SelectModule, TagModule],
+  imports: [TableModule, SelectModule, TagModule,FormsModule, ChipModule],
   templateUrl: './competences-list.component.html',
   styleUrl: './competences-list.component.scss'
 })
 export class CompetencesListComponent {
   competences: Competence[] = [];
   categories: Categorie[] = [];
-  selectedCompetence!: Competence;
+  selectedCategories!: Competence;
   constructor(private competencesService: CompetenceService, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
@@ -36,20 +38,32 @@ export class CompetencesListComponent {
     );
   }
 
-  getSeverity(categorie: Categorie) {
+  getSeverity(status: string): 'success' | 'info' | 'warn' | 'danger' | 'secondary' {
+    switch (status) {
+      case 'A':
+        return 'info';
+      case 'B':
+        return 'success';
+      case 'C':
+        return 'warn';
+      case 'E':
+        return 'danger';
+      default:
+        return 'secondary';
+    }
+  }
 
-    if (categorie.idCategorie === 'A') {
-      return 'success';
+  filter(value: string, field: keyof Competence) {
+    if (value) {
+      this.competences = this.competences.filter(competence => competence[field] === value);
+    } else {
+      this.competencesService.getCompetences().subscribe((competences: Competence[]) => {
+        this.competences = competences;
+      });
     }
-    else if (categorie.idCategorie === 'B') {
-      return 'warning';
-    }
-    else if (categorie.idCategorie === 'C') {
-      return 'danger';
-    }
-    else if (categorie.idCategorie === 'D') {
-      return 'primary';
-    }
-      return 'info';
+  }
+
+  getDescCategorie(id: String): string {
+    return this.categories.find(categorie => categorie.idCategorie === id)?.description || '';
   }
 }
