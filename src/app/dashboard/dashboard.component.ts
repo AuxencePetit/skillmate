@@ -10,7 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ConfirmDialog } from 'primeng/confirmdialog';
+import { CompetencesListComponent } from '../competences-list/competences-list.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,6 +54,9 @@ export class DashboardComponent implements OnInit {
   }
   goToDashboard(): void {
     this.router.navigate(['dashboard']);
+  }
+  goToCompetences(): void {
+    this.router.navigate(['dashboard/competences']);
   }
 }
 

@@ -15,4 +15,10 @@ export interface Personnel {
     description: string;
     idCategorie: number;
   }
+
+  export interface Categorie {
+    idCategorie: string;
+    description: string;
+  }
+
   

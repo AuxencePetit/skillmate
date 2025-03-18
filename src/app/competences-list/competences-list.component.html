@@ -1,0 +1,63 @@
+<p-table 
+        #dt2 
+        [value]="competences!" 
+        [paginator]="true" 
+        [rows]="5" 
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        [globalFilterFields]="['libelle','idCategorie']"
+        [sortField]="'idCategorie'"
+        [sortOrder]="1"
+    >
+        <ng-template #header>
+            <tr>
+                <th pSortableColumn="libelle">Id</th>
+                <th>Libelle</th>
+                <th>description</th>
+                <th pSortableColumn="idCategorie">Categorie</th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="libelle" placeholder="Filtre par nom"
+                        ariaLabel="Filtre par nom"></p-columnFilter>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                    <p-columnFilter field="idCategorie" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter">
+                            <p-select
+                                [(ngModel)]="selectedCategories"
+                                [options]="categories"
+                                (onChange)="filter($event.value, 'idCategorie')"
+                                placeholder="Sélectionner"
+                                [showClear]="true"
+                            >
+                                <ng-template let-cat #item>
+                                    <p-tag [value]="cat" [severity]="getSeverity(cat)" />
+                                </ng-template>
+                            </p-select>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template #body let-mission>
+            <tr>
+                <td>{{ mission.libelle }}</td>
+                <td>{{ mission.description }}</td>
+                <td>{{ mission.date_debut }}</td>
+                <td>{{ mission.duree }} j</td>  
+                <td>
+                    <p-tag [value]="mission.idCategorie" [severity]="getSeverity(mission.idCategorie)" />
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="5">Aucune mission trouvée</td>
+            </tr>
+        </ng-template>
+    </p-table>
