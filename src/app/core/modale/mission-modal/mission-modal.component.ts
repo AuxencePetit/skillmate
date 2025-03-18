@@ -1,4 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+// import { PersonnelService } from './personnel.service'; 
+import { PersonnelService } from '../../../services/personnel.service';
+
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
@@ -18,7 +21,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './mission-modal.component.html',
   styleUrls: ['./mission-modal.component.scss']
 })
-export class MissionModalComponent {
+export class MissionModalComponent implements OnInit {
   @Input() displayModal: boolean = false;
   @Output() displayModalChange = new EventEmitter<boolean>();
 
@@ -30,10 +33,28 @@ export class MissionModalComponent {
     description: '' 
   };
 
-  chefs = [
-    { name: 'Chef 1', code: 'C1' },
-    { name: 'Chef 2', code: 'C2' }
-  ];
+  chefs: any[] = [];
+
+  constructor(private personnelService: PersonnelService) {} // Injectez le service
+
+  ngOnInit() {
+    this.fetchEmployees();
+  }
+
+  fetchEmployees() {
+    this.personnelService.recupererEmployees().subscribe(
+      (data) => {
+        this.chefs = data.map((employee: { nom: any; prenom: any; idUtilisateur: any; }) => ({
+          name: `${employee.nom} ${employee.prenom}`,
+          code: employee.idUtilisateur
+        }));
+        console.log('Chefs récupérés :', this.chefs); // Vérifiez les données
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des employés:', error);
+      }
+    );
+  }
 
   showModal() {
     this.displayModal = true;
@@ -50,4 +71,3 @@ export class MissionModalComponent {
     this.closeModal(); 
   }
 }
-

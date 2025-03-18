@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,9 @@ export class PersonnelService {
 
   deletePersonnel(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  recupererEmployees(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/employees`);
   }
 }
