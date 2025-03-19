@@ -10,8 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PersonnelsComponent } from './personnels/personnels.component';
 import { MissionComponent } from './mission/mission.component';
 import { DashboardNewsComponent } from './dashboard-news/dashboard-news.component';
-import { CalendarComponent } from './utilities-dashbord/calendar/calendar.component';
-import { DonutChartComponent } from './utilities-dashbord/donut-chart/donut-chart.component';
+import { CompetencesListComponent } from './competences-list/competences-list.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -28,7 +27,8 @@ export const routes: Routes = [
       {path: '', component: DashboardNewsComponent},
       {path: 'profile/:id', component: ProfileComponent},
       {path: 'personnels', component: PersonnelsComponent},
-      {path: 'mission', component: MissionComponent}
+      {path: 'mission', component: MissionComponent},
+      {path: 'competences', component: CompetencesListComponent},
     ]
    }
 ];
