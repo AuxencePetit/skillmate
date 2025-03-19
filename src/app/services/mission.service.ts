@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Mission } from '../models/mission.model';
-import { Personnel } from '../models/personnel.model';
 import { PersonnelService } from './personnel.service';
 import { Observable } from 'rxjs';
 
@@ -22,10 +21,6 @@ export class MissionService {
     return this.http.get<Mission>(`${this.apiUrl}/${id}`);
   }
 
-  // createMission(mission: Mission): Observable<Mission> {
-  //   return this.http.post<Mission>(this.apiUrl, mission);
-  // }
-   // Créer une nouvelle mission
    createMission(mission: {
     nom_mission: string;
     description: string;
@@ -46,9 +41,5 @@ export class MissionService {
   addPersonnelToMission(idMission: number, idUtilisateur: number,role: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${idMission}/personnels`, {idUtilisateur});
     this.personnelService.updatePersonnelRole(idUtilisateur, role);
-    
   }
-
-  
-
 }
