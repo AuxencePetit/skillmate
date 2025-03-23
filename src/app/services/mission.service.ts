@@ -41,7 +41,7 @@ export class MissionService {
   }
 
   addPersonnelToMission(idMission: number, idUtilisateur: number,role: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${idMission}/personnels`, {idUtilisateur});
+    return this.http.post(`${this.apiUrl}/${idMission}/affecter`, {idUtilisateur, idMission, date: new Date()});
     this.personnelService.updatePersonnelRole(idUtilisateur, role);
   }
 }

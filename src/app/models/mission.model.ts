@@ -1,3 +1,6 @@
+import { Personnel } from './personnel.model';
+import { Competence } from './personnel.model';
+
 export interface Mission {
     idMission: number;
     nom_mission: string;
@@ -5,17 +8,18 @@ export interface Mission {
     dateDebut: Date;
     duree: number;
     statut_mission: 'En préparation' | 'planifiee' | 'en cours' | 'terminé';
+
     }
 
 export interface AffecterPersMission {
     idMission: number;
-    idUtilisateur: number;
+    personnel: Personnel;
     dateAffectation: Date;
 }
 
 export interface NecessiterMissionComp {
+    competence: Competence;
     idMission: number;
-    idComp: number;
-    niveau_requis: number;
+    nombre_personne: number;
 }
 

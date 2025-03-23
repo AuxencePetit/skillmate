@@ -1,0 +1,13 @@
+@import '../../styles.scss';
+
+#competence-table {
+  margin-top: 20px;
+}
+
+#competence-table h2 {
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  background-color: $main-green;
+  color: $main-light;
+}

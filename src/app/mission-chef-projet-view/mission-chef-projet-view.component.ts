@@ -1,26 +1,59 @@
-import { Component } from '@angular/core';
 
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
+//models
 import { Competence } from '../models/personnel.model';
 import { Mission } from '../models/mission.model';
 import { Personnel } from '../models/personnel.model';
+import { AffecterPersMission } from '../models/mission.model';
+import { NecessiterMissionComp } from '../models/mission.model';
+
+//services
 import { PersonnelService } from '../services/personnel.service';
-import { MissionService } from '../services/mission.service';
 import { CompetenceService } from '../services/competence.service';
 import { MissionUserService } from '../services/mission-user.service';
 import { SessionService } from '../services/session.service';
 
+//primeng
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TableModule } from 'primeng/table';
+import { SelectModule } from 'primeng/select';
+
 @Component({
   selector: 'app-mission-chef-projet-view',
-  imports: [],
+  imports: [
+    DialogModule,
+    ButtonModule,
+    InputTextModule,
+    InputNumberModule,
+    FormsModule,
+    TableModule,
+    SelectModule
+  ],
   templateUrl: './mission-chef-projet-view.component.html',
   styleUrl: './mission-chef-projet-view.component.scss'
 })
 export class MissionChefProjetViewComponent {
+
   userInfo: { idUtilisateur: number; nom: string; prenom: string; email: string } | null = null;
-  competencesMission!: Competence[];
+  competencesMission!: NecessiterMissionComp[];
+  allCompetences!: Competence[];
   missionUser!: Mission;
-  equipe: Personnel[] = [];
+  equipe: AffecterPersMission[] = [];
   allPersonnels: Personnel[] = [];
+  visible: boolean = false;
+
+  //variables pour le dialog
+  selectedCompetence!: Competence;
+  nbPersonnel: number = 1;
+
+
   constructor(
     private personnelsService: PersonnelService,
     private competenceService: CompetenceService,
@@ -30,50 +63,32 @@ export class MissionChefProjetViewComponent {
 
   ngOnInit() {
     this.userInfo = this.sessionService.getUserInfo();
+    this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((mission: Mission) => {
+      this.missionUser = mission;
+      this.competenceService.getCompetencesByMissionId(this.missionUser.idMission).subscribe((competences: NecessiterMissionComp[]) => {
+        this.competencesMission = competences;
+      });
+    }
+    );
+
     this.competenceService.getCompetences().subscribe((competences: Competence[]) => {
-      this.competencesMission = competences;
+      this.allCompetences = competences;
     });
-    this.personnelsService.getPersonnels().subscribe((data: any) => {
-      this.allPersonnels = data;
-      for (let personnel of this.allPersonnels) {
-      this.competenceService.getCompetencesByUserId(personnel.idUtilisateur).subscribe((data: any) => {
-        personnel.competences = data;
 
-      });
-    }
+    this.personnelsService.getPersonnels().subscribe((personnels: any) => {
+      this.allPersonnels = personnels;
     });
-    this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((data: any) => {
-      this.missionUser = data;
-      this.missionUserService.getPersonnelByMission(this.missionUser.idMission).subscribe((data: any) => {
-        this.equipe = data;
-      });
-    });
-}
-  appendPersonelToEquipe(personnel: Personnel) {
-    this.equipe.push(personnel);
+
   }
-
-  removePersonnelFromEquipe(personnel: Personnel) {
-    this.equipe = this.equipe.filter((p) => p !== personnel);
-  }
-
-  saveEquipe() {
-    this.equipe.forEach((personnel) => {
-      this.missionUserService.addPersonnelToMission(personnel.idUtilisateur, this.missionUser.idMission).subscribe();
+  appendCompetence(competence: Competence) {
+    this.competencesMission.push({
+      competence,
+      idMission: this.missionUser.idMission,
+      nombre_personne: this.nbPersonnel
     });
   }
 
-  orderPersonnelByMatchingMissionCompetences(personnel: Personnel) {
-    let matchingCompetences = 0;
-    for (let competence of (personnel.competences || [])) {
-      if (this.competencesMission.includes(competence)) {
-        matchingCompetences++;
-      }
-    }
-    return matchingCompetences;
-  }
-
-  nbPersonnelMatchingACompetence(competence: Competence) {
-    return this.equipe.filter((personnel) => personnel.competences && personnel.competences.includes(competence)).length;
+  showDialog() {
+    this.visible = true;
   }
 }

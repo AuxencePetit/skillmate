@@ -1,73 +1,78 @@
-<p-table 
-        #dt2 
-        [value]="competences!" 
-        [paginator]="true" 
-        [rows]="10" 
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [globalFilterFields]="['libelle','idCategorie']"
-        [sortField]="'idCategorie'"
-        [sortOrder]="1"
-    >
-        <ng-template #header>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Description</th>
-                <th>Categorie</th>
-            </tr>
-            <tr>
-                
-                <th></th>
-                <th>
-                    <p-columnFilter type="text" field="libelle" placeholder="Filtre par nom"
-                        ariaLabel="Filtre par nom"></p-columnFilter>
-                </th>
-                <th></th>
-                <th>
-                    <p-columnFilter field="idCategorie" matchMode="equals" [showMenu]="false">
-                        <ng-template pTemplate="filter">
-                            <p-select
-                                [(ngModel)]="selectedCategories"
-                                [options]="categories"
-                                (onChange)="filter($event.value, 'idCategorie')"
-                                placeholder="Sélectionner"
-                                [showClear]="true"
-                            >
-                                <ng-template let-cat #item>
-                                    <p-chip class="!py-0 !pl-0 !pr-4">
-                                        <span class="{{cat.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
-                                            {{ cat.idCategorie }}
-                                        </span>
-                                    </p-chip>
-                                </ng-template>
-                            </p-select>
-                        </ng-template>
-                    </p-columnFilter>
-                </th>
-            </tr>
-        </ng-template>
+<div id="competence-table">
+  <h2>
+    Liste des compétences
+  </h2>
+  <p-table
+          #dt2
+          [value]="competences!"
+          [paginator]="true"
+          [rows]="10"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [globalFilterFields]="['libelle','idCategorie']"
+          [sortField]="'idCategorie'"
+          [sortOrder]="1"
+      >
+          <ng-template #header>
+              <tr>
+                  <th>Id</th>
+                  <th>Libelle</th>
+                  <th>Description</th>
+                  <th>Categorie</th>
+              </tr>
+              <tr>
 
-        <ng-template #body let-competence>
-            <tr>
-                <td>{{ competence.idComp }}</td>
-                <td>{{ competence.libelle }}</td>
-                <td>{{ competence.description }}</td> 
-                <td>
-                    <p-chip class="!py-0 !pl-0 !pr-4">
-                        <span class="{{competence.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
-                            {{ competence.idCategorie }}
-                        </span>
-                        <span class="ml-2 font-medium">
-                            {{ getDescCategorie(competence.idCategorie) }}
-                        </span>
-                    </p-chip>
-                </td>
-            </tr>
-        </ng-template>
+                  <th></th>
+                  <th>
+                      <p-columnFilter type="text" field="libelle" placeholder="Filtre par nom"
+                          ariaLabel="Filtre par nom"></p-columnFilter>
+                  </th>
+                  <th></th>
+                  <th>
+                      <p-columnFilter field="idCategorie" matchMode="equals" [showMenu]="false">
+                          <ng-template pTemplate="filter">
+                              <p-select
+                                  [(ngModel)]="selectedCategories"
+                                  [options]="categories"
+                                  (onChange)="filter($event.value, 'idCategorie')"
+                                  placeholder="Sélectionner"
+                                  [showClear]="true"
+                              >
+                                  <ng-template let-cat #item>
+                                      <p-chip class="!py-0 !pl-0 !pr-4">
+                                          <span class="{{cat.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
+                                              {{ cat.idCategorie }}
+                                          </span>
+                                      </p-chip>
+                                  </ng-template>
+                              </p-select>
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+              </tr>
+          </ng-template>
 
-        <ng-template #emptymessage>
-            <tr>
-                <td colspan="5">Aucune competence trouvée</td>
-            </tr>
-        </ng-template>
-    </p-table>
+          <ng-template #body let-competence>
+              <tr>
+                  <td>{{ competence.idComp }}</td>
+                  <td>{{ competence.libelle }}</td>
+                  <td>{{ competence.description }}</td>
+                  <td>
+                      <p-chip class="!py-0 !pl-0 !pr-4">
+                          <span class="{{competence.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
+                              {{ competence.idCategorie }}
+                          </span>
+                          <span class="ml-2 font-medium">
+                              {{ getDescCategorie(competence.idCategorie) }}
+                          </span>
+                      </p-chip>
+                  </td>
+              </tr>
+          </ng-template>
+
+          <ng-template #emptymessage>
+              <tr>
+                  <td colspan="5">Aucune competence trouvée</td>
+              </tr>
+          </ng-template>
+      </p-table>
+</div>
