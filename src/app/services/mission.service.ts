@@ -5,15 +5,15 @@ import { PersonnelService } from './personnel.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MissionService {
-
-
-  constructor(private http: HttpClient, private personnelService: PersonnelService) { }
+  constructor(
+    private http: HttpClient,
+    private personnelService: PersonnelService
+  ) {}
 
   private apiUrl = 'http://localhost:3000/missions'; // Ajuste selon ton API
-
 
   getMissions(): Observable<Mission[]> {
     return this.http.get<Mission[]>(this.apiUrl);
@@ -23,17 +23,21 @@ export class MissionService {
     return this.http.get<Mission>(`${this.apiUrl}/${id}`);
   }
 
-   createMission(mission: {
+  createMission(mission: {
     nom_mission: string;
     description: string;
     date_debut: string;
     duree: number;
+    idUtilisateur: number;
   }): Observable<any> {
     return this.http.post(this.apiUrl, mission);
   }
 
   updateMission(mission: Mission): Observable<Mission> {
-    return this.http.put<Mission>(`${this.apiUrl}/${mission.idMission}`, mission);
+    return this.http.put<Mission>(
+      `${this.apiUrl}/${mission.idMission}`,
+      mission
+    );
   }
 
   deleteMission(id: number): Observable<Mission> {
@@ -43,5 +47,8 @@ export class MissionService {
   addPersonnelToMission(idMission: number, idUtilisateur: number,role: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${idMission}/affecter`, {idUtilisateur, idMission, date: new Date()});
     this.personnelService.updatePersonnelRole(idUtilisateur, role);
+    return this.http.post(`${this.apiUrl}/${idMission}/personnels`, {
+      idUtilisateur,
+    });
   }
 }

@@ -3,10 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PersonnelService {
-
   constructor(private http: HttpClient) {}
 
   private apiUrl = 'http://localhost:3000/personnel'; // Ajuste selon ton API
@@ -28,8 +27,7 @@ export class PersonnelService {
   }
 
   updatePersonnelRole(id: number, role: string) {
-    return this.http.put(`${this.apiUrl}/${id}/role`, {role
-    });
+    return this.http.put(`${this.apiUrl}/${id}/role`, { role });
   }
 
   deletePersonnel(id: number) {

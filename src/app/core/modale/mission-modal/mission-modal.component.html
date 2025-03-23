@@ -1,4 +1,4 @@
-<p-dialog header="Créer une Mission" [(visible)]="displayModal" [style]="{width: '50vw'}" [modal]="true" (onHide)="closeModal()">
+<!-- <p-dialog header="Créer une Mission" [(visible)]="displayModal" [style]="{width: '50vw'}" [modal]="true" (onHide)="closeModal()">
   <form (ngSubmit)="onSubmit()" #missionForm="ngForm">
     <div class="p-field">
       <label for="titre">Intitulé de mission</label>
@@ -42,5 +42,52 @@
       ></textarea>
     </div>
     <button pButton type="submit" label="Créer" [disabled]="!missionForm.form.valid"></button>
+  </form>
+</p-dialog> -->
+<p-dialog header="Créer une Mission" [(visible)]="displayModal" [style]="{width: '50vw'}" [modal]="true" (onHide)="closeModal()">
+  <form (ngSubmit)="onSubmit()" #missionForm="ngForm">
+    <div class="p-field">
+      <label for="titre">Intitulé de mission *</label>
+      <input id="titre" pInputText type="text" name="titre" [(ngModel)]="mission.titre" required />
+    </div>
+    <div class="p-field">
+      <label for="chef">Chef de mission *</label>
+      <p-dropdown
+        id="chef"
+        [options]="chefs"
+        [(ngModel)]="mission.chef"
+        optionLabel="name"
+        name="chef"
+        required
+      ></p-dropdown>
+    </div>
+    <div class="p-field">
+      <label for="dateDebut">Date de début *</label>
+      <p-calendar
+        id="dateDebut"
+        [(ngModel)]="mission.dateDebut"
+        name="dateDebut"
+        dateFormat="dd/mm/yy"
+        required
+      ></p-calendar>
+    </div>
+    <div class="p-field">
+      <label for="duree">Durée *</label>
+      <input id="duree" pInputText type="number" name="duree" [(ngModel)]="mission.duree" required />
+    </div>
+    <div class="p-field">
+      <label for="description">Description de la mission *</label>
+      <textarea
+        id="description"
+        pInputTextarea
+        rows="5"
+        cols="30"
+        [(ngModel)]="mission.description"
+        name="description"
+        required
+      ></textarea>
+    </div>
+    <button pButton type="submit" label="Créer" [disabled]="!missionForm.form.valid"></button>
+    <p class="required-note">* Tous les champs sont obligatoires</p>
   </form>
 </p-dialog>
