@@ -2,54 +2,57 @@
 .p-dialog {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
-  
+  .p-dialog-content {
+    overflow: hidden;
+  }
+
   .p-dialog-header {
     background-color: #007bff;
     color: white;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
-  
+
   .p-dialog-content {
     padding: 20px;
   }
-  
+
   .p-field {
     margin-bottom: 15px;
   }
-  
+
   .p-field label {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
   }
-  
+
   .p-field input,
   .p-field textarea,
-  .p-dropdown,
+  .p-select,
   .p-calendar {
     width: 100%;
-    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
   }
-  
+
   .p-field input:required,
   .p-field textarea:required,
-  .p-dropdown:required,
+  .p-select:required,
   .p-calendar:required {
     border-color: #007bff;
   }
-  
+
   .p-field input:invalid,
   .p-field textarea:invalid,
-  .p-dropdown:invalid,
+  .p-select:invalid,
   .p-calendar:invalid {
     border-color: #dc3545;
   }
-  
+
   .p-button {
     background-color: #007bff;
     color: white;
@@ -58,16 +61,14 @@
     border-radius: 4px;
     font-size: 16px;
   }
-  
+
   .p-button:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
   }
-  
 
   .required-note {
     color: #dc3545;
     font-size: 14px;
     margin-top: 10px;
   }
-  

@@ -1,75 +1,41 @@
-<!-- <p-dialog header="Créer une Mission" [(visible)]="displayModal" [style]="{width: '50vw'}" [modal]="true" (onHide)="closeModal()">
-  <form (ngSubmit)="onSubmit()" #missionForm="ngForm">
-    <div class="p-field">
-      <label for="titre">Intitulé de mission</label>
-      <input id="titre" pInputText type="text" name="titre" [(ngModel)]="mission.titre" required />
-    </div>
-    <div class="p-field">
-      <label for="chef">Chef de mission</label>
-      <p-dropdown
-        id="chef"
-        [options]="chefs"
-        [(ngModel)]="mission.chef"
-        optionLabel="name"
-        name="chef"
-        required
-      ></p-dropdown>
-    </div>
-    <div class="p-field">
-      <label for="dateDebut">Date de début</label>
-      <p-calendar
-        id="dateDebut"
-        [(ngModel)]="mission.dateDebut"
-        name="dateDebut"
-        dateFormat="dd/mm/yy"
-        required
-      ></p-calendar>
-    </div>
-    <div class="p-field">
-      <label for="duree">Durée</label>
-      <input id="duree" pInputText type="number" name="duree" [(ngModel)]="mission.duree" required />
-    </div>
-    <div class="p-field">
-      <label for="description">Description de la mission</label>
-      <textarea
-        id="description"
-        pInputTextarea
-        rows="5"
-        cols="30"
-        [(ngModel)]="mission.description"
-        name="description"
-        required
-      ></textarea>
-    </div>
-    <button pButton type="submit" label="Créer" [disabled]="!missionForm.form.valid"></button>
-  </form>
-</p-dialog> -->
+<p-toast />
 <p-dialog header="Créer une Mission" [(visible)]="displayModal" [style]="{width: '50vw'}" [modal]="true" (onHide)="closeModal()">
-  <form (ngSubmit)="onSubmit()" #missionForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #missionForm="ngForm" style="overflow: hidden;">
     <div class="p-field">
       <label for="titre">Intitulé de mission *</label>
       <input id="titre" pInputText type="text" name="titre" [(ngModel)]="mission.titre" required />
     </div>
     <div class="p-field">
       <label for="chef">Chef de mission *</label>
-      <p-dropdown
-        id="chef"
-        [options]="chefs"
-        [(ngModel)]="mission.chef"
-        optionLabel="name"
-        name="chef"
-        required
-      ></p-dropdown>
+      <p-select [options]="chefs" [(ngModel)]="mission.chef" [ngModelOptions]="{standalone: true}" optionLabel="nom" [filter]="true" filterBy="nom" [showClear]="true" placeholder="Selectionner un chef" class="w-full md:w-56">
+        <ng-template let-chef pTemplate="item">
+            <div class="flex items-center gap-2">
+              <p> {{ chef.prenom }} </p>
+              <div>
+               {{ chef.nom }}
+              </div>
+            </div>
+        </ng-template>
+        <ng-template let-selectedChef pTemplate="selectedItem">
+            <div class="flex items-center gap-2">
+              <div>
+                {{ selectedChef.prenom }} {{ selectedChef.nom }}
+              </div>
+            </div>
+        </ng-template>
+    </p-select>
+
     </div>
     <div class="p-field">
       <label for="dateDebut">Date de début *</label>
-      <p-calendar
-        id="dateDebut"
+      <p-datepicker
         [(ngModel)]="mission.dateDebut"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="dateDebut"
         name="dateDebut"
         dateFormat="dd/mm/yy"
-        required
-      ></p-calendar>
+        required />
     </div>
     <div class="p-field">
       <label for="duree">Durée *</label>

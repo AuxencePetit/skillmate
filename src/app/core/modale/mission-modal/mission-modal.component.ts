@@ -1,27 +1,32 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { PersonnelService } from '../../../services/personnel.service';
 import { MissionService } from '../../../services/mission.service';
+
+//import primeNG modules
+import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
+import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { Personnel } from '../../../models/personnel.model';
+import { ToastModule } from 'primeng/toast';
+import { DatePickerModule } from 'primeng/datepicker';
+import { MessageService } from 'primeng/api';
+import { Mission } from '../../../models/mission.model';
 
-// Définir un type pour chef
-interface Chef {
-  name: string;
-  code: number;
-}
+
 
 @Component({
   selector: 'app-mission-modal',
   standalone: true,
   imports: [
     DialogModule,
-    DropdownModule,
-    CalendarModule,
+    SelectModule,
+    DatePickerModule,
     ButtonModule,
     FormsModule,
+    ToastModule,
+    InputTextModule,
   ],
   templateUrl: './mission-modal.component.html',
   styleUrls: ['./mission-modal.component.scss'],
@@ -29,20 +34,24 @@ interface Chef {
 export class MissionModalComponent implements OnInit {
   @Input() displayModal: boolean = false;
   @Output() displayModalChange = new EventEmitter<boolean>();
+  @Output() modalClosed = new EventEmitter<void>();
 
   mission = {
     titre: '',
-    chef: {} as Chef, // Initialiser objet de type Chef
+    chef: {} as Personnel,
     dateDebut: new Date(), // date par défaut
     duree: 0,
     description: '',
   };
 
-  chefs: Chef[] = [];
+  chefs: Personnel[] = []; // Liste des gens disponibles pour etre chef de projet
+  selectedChef: Personnel | null = null; // Chef sélectionné
+  missions: Mission[] | undefined;
 
   constructor(
     private personnelService: PersonnelService,
-    private missionService: MissionService
+    private missionService: MissionService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -51,18 +60,9 @@ export class MissionModalComponent implements OnInit {
 
   fetchEmployees() {
     this.personnelService.recupererEmployees().subscribe(
-      (data) => {
-        this.chefs = data.map(
-          (employee: { nom: any; prenom: any; idUtilisateur: any }) => ({
-            name: `${employee.nom} ${employee.prenom}`,
-            code: employee.idUtilisateur,
-          })
-        );
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des employés:', error);
-      }
-    );
+      (response: Personnel[]) => {
+        this.chefs = response
+      });
   }
 
   onSubmit() {
@@ -77,20 +77,18 @@ export class MissionModalComponent implements OnInit {
       return;
     }
 
-    const formattedDate = this.formatDate(this.mission.dateDebut);
-
     const duree = Number(this.mission.duree);
-
+    const formattedDate = this.formatToDateOnly(this.mission.dateDebut); // Formater la date
     const missionData = {
       nom_mission: this.mission.titre,
       description: this.mission.description,
-      date_debut: formattedDate,
-      duree: duree,
-      idUtilisateur: this.mission.chef.code,
+      date_debut: formattedDate, // Utiliser la date formatée
+      duree: duree
     };
 
+
     // Envoyez backend
-    this.missionService.createMission(missionData).subscribe(
+    this.missionService.createMission(missionData,this.mission.chef.idUtilisateur).subscribe(
       (response) => {
         console.log('Mission créée avec succès :', response);
         this.closeModal();
@@ -99,15 +97,21 @@ export class MissionModalComponent implements OnInit {
         console.error('Erreur lors de la création de la mission :', error);
       }
     );
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Succès',
+      detail: 'Mission créée avec succès',
+    });
   }
 
-  // Méthode pour formater la date au format YYYY-MM-DD
-  formatDate(date: Date): string {
+  // Méthode pour formater la date au format YYYY-MM-DD en string
+  formatToDateOnly(date: Date): string {
     const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+    const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+
 
   showModal() {
     this.displayModal = true;
@@ -117,5 +121,6 @@ export class MissionModalComponent implements OnInit {
   closeModal() {
     this.displayModal = false;
     this.displayModalChange.emit(this.displayModal);
+    this.modalClosed.emit();
   }
 }

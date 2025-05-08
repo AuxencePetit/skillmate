@@ -5,7 +5,7 @@ export interface Mission {
     idMission: number;
     nom_mission: string;
     description: string;
-    dateDebut: Date;
+    dateDebut: string;
     duree: number;
     statut_mission: 'En préparation' | 'planifiee' | 'en cours' | 'terminé';
 

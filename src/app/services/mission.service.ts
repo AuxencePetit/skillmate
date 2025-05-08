@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Mission } from '../models/mission.model';
 import { PersonnelService } from './personnel.service';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,14 +23,19 @@ export class MissionService {
     return this.http.get<Mission>(`${this.apiUrl}/${id}`);
   }
 
-  createMission(mission: {
-    nom_mission: string;
-    description: string;
-    date_debut: string;
-    duree: number;
-    idUtilisateur: number;
-  }): Observable<any> {
-    return this.http.post(this.apiUrl, mission);
+  createMission(mission: { nom_mission: string; description: string; date_debut: string; duree: number }, idChefProj: number): Observable<any> {
+    console.log('Mission:', mission);
+    return this.http.post<{ id: { insertId: number } }>(this.apiUrl, mission).pipe(
+      switchMap((response) => {
+        if (!response || !response.id || !response.id.insertId) {
+          throw new Error('Invalid response from API');
+        }
+        const idMission = response.id.insertId;
+        return this.addPersonnelToMission(idMission, idChefProj, 'chef_projet').pipe(
+          map(() => idMission)
+        );
+      })
+    );
   }
 
   updateMission(mission: Mission): Observable<Mission> {
@@ -44,11 +49,11 @@ export class MissionService {
     return this.http.delete<Mission>(`${this.apiUrl}/${id}`);
   }
 
-  addPersonnelToMission(idMission: number, idUtilisateur: number,role: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${idMission}/affecter`, {idUtilisateur, idMission, date: new Date()});
-    this.personnelService.updatePersonnelRole(idUtilisateur, role);
-    return this.http.post(`${this.apiUrl}/${idMission}/personnels`, {
-      idUtilisateur,
-    });
+  addPersonnelToMission(idMission: number, idUtilisateur: number, role: string): Observable<any> {
+    return this.personnelService.updatePersonnelRole(idUtilisateur, role).pipe(
+      switchMap(() =>
+        this.http.post(`${this.apiUrl}/affecter`, { idUtilisateur, idMission, date: new Date() })
+      )
+    );
   }
 }
