@@ -1,58 +1,62 @@
 @import '../../styles.scss';
 
 #create-mission {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2%;
 }
 
 .create-mission-button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: $main-green;
-    color: $main-light;
-    padding: 20px;
-    border-radius: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: $main-green;
+  color: $main-light;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .create-mission-button:hover {
-    background-color: darken($color: $main-green, $amount: 10%);
+  background-color: darken($color: $main-green, $amount: 10%);
 }
 
 .create-mission-button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .create-mission-button h2 {
-    margin: 0;
-    margin-left: 2%;
-    user-select: none;
+  margin: 0;
+  margin-left: 2%;
+  user-select: none;
 }
 
 #create-mission-from {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 10px;
-    background-color: lighten($color: $main-green, $amount: 20%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: lighten($color: $main-green, $amount: 20%);
 }
 
 #missions-table {
-    border-radius: 10px;
-    background-color: white;
-}
-#missions-table h2 {
-    margin: 0;
-    padding: 20px;
-    border-radius: 10px 10px 0 0;
-    background-color: $main-green;
-    color: $main-light;
+  border-radius: 10px;
+  background-color: white;
 }
 
-.bouttonCreationMission{
-    margin-left: 40em;
+.table-title {
+  display: flex;
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  background-color: $main-green;
+  color: $main-light;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bouttonCreationMission {
+  margin-left: 40em;
 }

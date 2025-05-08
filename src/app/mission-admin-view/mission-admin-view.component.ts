@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Mission } from '../models/mission.model';
 import { MissionService } from '../services/mission.service';
 import { ButtonModule } from 'primeng/button';
-import { CreateMissionComponent } from '../create-mission/create-mission.component';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { SelectModule } from 'primeng/select';
@@ -29,6 +28,16 @@ import { MissionModalComponent } from "../core/modale/mission-modal/mission-moda
   openModal() {
     this.isModalVisible = true; // Définit la variable pour afficher la modal
   }
+  onModalClose() {
+    this.isModalVisible = false; // Cache la modal
+    this.refreshMissions(); // Actualise la liste des missions
+  }
+
+  refreshMissions() {
+    this.missionService.getMissions().subscribe((missions: Mission[]) => {
+      this.missions = missions;
+    });
+  }
 
   getSeverity(status: string): 'success' | 'info' | 'warn' | 'danger' {
     switch (status) {
@@ -46,7 +55,7 @@ import { MissionModalComponent } from "../core/modale/mission-modal/mission-moda
   }
 
   // Fonction de filtrage avec un champ typé
-  filter(value: string, field: keyof Mission) {  
+  filter(value: string, field: keyof Mission) {
     if (value) {
       this.missions = this.missions!.filter(mission => mission[field] === value);
     } else {
