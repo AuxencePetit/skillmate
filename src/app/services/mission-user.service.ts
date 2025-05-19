@@ -15,9 +15,9 @@ export class MissionUserService {
 
   private apiUrl = 'http://localhost:3000/missionUser'; // Ajuste selon ton API
 
-  getMissionUser(id: number): Observable<Mission> {
-    return this.http.get<Mission>(`${this.apiUrl}/user/${id}`);
-  }
+ getMissionUser(id: number): Observable<Mission[]> {
+  return this.http.get<Mission[]>(`${this.apiUrl}/user/${id}`);
+}
 
   getPersonnelByMission(id: number): Observable<Personnel[]> {
     return this.http.get<Personnel[]>(`${this.apiUrl}/mission/${id}`);

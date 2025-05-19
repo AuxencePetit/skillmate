@@ -1,0 +1,61 @@
+
+<p-toast />
+<p-dialog header="Ajouter une compétences" [(visible)]="displayModal" [style]="{width: '40vw', height: '55vh'}" [modal]="true" (onHide)="closeModal()">
+  <form (ngSubmit)="onSubmit()" #missionForm="ngForm" style="height: 100%;display: flex;align-content: space-around;flex-direction: column;justify-content: space-between;">
+    <div class="modal-content">
+      <div class="p-field">
+        <label for="chef">Compétence *</label>
+        <p-select
+          [options]="competences"
+          [(ngModel)]="selectedCompetence"
+          name="competence"
+          required
+          optionLabel="libelle"
+          [filter]="true"
+          filterBy="libelle"
+          [showClear]="true"
+          placeholder="Selectionner une compétence"
+          class="w-full md:w-56"
+          #competenceCtrl="ngModel"
+          >
+          <ng-template let-compt pTemplate="item" style="margin: 0;">
+              <div class="flex items-center" style="margin: 0;">
+                <p-tag class="{{compt.idCategorie}}" value="{{ compt.libelle }}" />
+              </div>
+          </ng-template>
+          <ng-template let-selectedCompt pTemplate="selectedItem" style="margin: 0;">
+              <div class="flex items-center" style="margin: 0;">
+                <div style="margin: 0;">
+                  <h3 style="margin: 0;" class="{{selectedCompt.idCategorie}}">{{ selectedCompt.libelle }}</h3>
+                </div>
+              </div>
+          </ng-template>
+        </p-select>
+         <div *ngIf="competenceCtrl.invalid && (competenceCtrl.dirty || competenceCtrl.touched)" class="error">
+          La compétence est requise.
+        </div>
+      </div>
+      <div class="p-field">
+        <label for="stacked">Nombre de personnes *</label>
+        <p-inputnumber
+          [(ngModel)]="numberOfPersonnelNeeded"
+          name="numberOfPersonnelNeeded"
+          required
+          [showButtons]="true"
+          inputId="stacked"
+          #numberCtrl="ngModel"
+          [min]="1"
+          [max]="100"
+          />
+        <div *ngIf="numberCtrl.invalid && (numberCtrl.dirty || numberCtrl.touched)" class="error">
+          Le nombre de personnes est requis.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <p class="required-note">* Tous les champs sont obligatoires</p>
+      <button pButton type="submit" label="Créer" [disabled]="!missionForm.form.valid"></button>
+    </div>
+  </form>
+</p-dialog>

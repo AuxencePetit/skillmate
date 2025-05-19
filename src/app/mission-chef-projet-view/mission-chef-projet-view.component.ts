@@ -1,8 +1,9 @@
 
-import { Component } from '@angular/core';
+import { Component, Input, input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { CompMissionModalComponent } from '../core/modale/comp-mission-modal/comp-mission-modal.component';
 
 //models
 import { Competence } from '../models/personnel.model';
@@ -34,25 +35,24 @@ import { SelectModule } from 'primeng/select';
     InputNumberModule,
     FormsModule,
     TableModule,
-    SelectModule
+    SelectModule,
+    CompMissionModalComponent
   ],
   templateUrl: './mission-chef-projet-view.component.html',
   styleUrl: './mission-chef-projet-view.component.scss'
 })
 export class MissionChefProjetViewComponent {
-
+editCompetence(_t19: any) {
+throw new Error('Method not implemented.');
+}
+deleteCompetence(_t19: any) {
+throw new Error('Method not implemented.');
+}
+  competencesNecessaires: NecessiterMissionComp[] = [];
+  Personnels: Personnel[] = [];
+  @Output() mission: Mission | null = null;
+  isModalVisible: boolean = false;
   userInfo: { idUtilisateur: number; nom: string; prenom: string; email: string } | null = null;
-  competencesMission!: NecessiterMissionComp[];
-  allCompetences!: Competence[];
-  missionUser!: Mission;
-  equipe: AffecterPersMission[] = [];
-  allPersonnels: Personnel[] = [];
-  visible: boolean = false;
-
-  //variables pour le dialog
-  selectedCompetence!: Competence;
-  nbPersonnel: number = 1;
-
 
   constructor(
     private personnelsService: PersonnelService,
@@ -60,35 +60,32 @@ export class MissionChefProjetViewComponent {
     private missionUserService: MissionUserService,
     private sessionService: SessionService
   ) {}
-
   ngOnInit() {
     this.userInfo = this.sessionService.getUserInfo();
-    this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((mission: Mission) => {
-      this.missionUser = mission;
-      this.competenceService.getCompetencesByMissionId(this.missionUser.idMission).subscribe((competences: NecessiterMissionComp[]) => {
-        this.competencesMission = competences;
+    if (!this.userInfo) {
+      // Redirige si non connecté
+      return;
+    }
+    this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((missions: Mission[]) => {
+      this.mission = missions[0];
+      console.log('Mission reçue :', this.mission);
+      this.updateCompetences();
+    });
+  }
+  openModal() {
+    this.isModalVisible = true;
+  }
+  onModalClose() {
+    this.isModalVisible = false;
+    this.updateCompetences();
+  }
+
+  updateCompetences() {
+    if (this.mission) {
+      this.competenceService.getCompetencesByMissionId(this.mission.idMission).subscribe((competences: NecessiterMissionComp[]) => {
+        this.competencesNecessaires = competences;
+        console.log('Compétences nécessaires :', this.competencesNecessaires);
       });
     }
-    );
-
-    this.competenceService.getCompetences().subscribe((competences: Competence[]) => {
-      this.allCompetences = competences;
-    });
-
-    this.personnelsService.getPersonnels().subscribe((personnels: any) => {
-      this.allPersonnels = personnels;
-    });
-
-  }
-  appendCompetence(competence: Competence) {
-    this.competencesMission.push({
-      competence,
-      idMission: this.missionUser.idMission,
-      nombre_personne: this.nbPersonnel
-    });
-  }
-
-  showDialog() {
-    this.visible = true;
   }
 }

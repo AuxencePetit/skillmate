@@ -1,0 +1,25 @@
+@import '../../../../styles.scss';
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-content div {
+  margin-bottom: 10%;
+}
+.error{
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  position: absolute;
+}

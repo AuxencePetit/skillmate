@@ -13,7 +13,8 @@ import { MissionModalComponent } from "../core/modale/mission-modal/mission-moda
   imports: [ButtonModule, TableModule, TagModule, SelectModule, FormsModule, MissionModalComponent],
   templateUrl: './mission-admin-view.component.html',
   styleUrls: ['./mission-admin-view.component.scss']
-})export class MissionAdminViewComponent {
+})
+export class MissionAdminViewComponent {
   missions?: Mission[];
   statuses: string[] = ['En préparation', 'Planifiée', 'En cours', 'Terminé'];
   selectedStatus: string | null = null;
@@ -32,6 +33,7 @@ import { MissionModalComponent } from "../core/modale/mission-modal/mission-moda
     this.isModalVisible = false; // Cache la modal
     this.refreshMissions(); // Actualise la liste des missions
   }
+
 
   refreshMissions() {
     this.missionService.getMissions().subscribe((missions: Mission[]) => {
