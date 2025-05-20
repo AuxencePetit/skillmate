@@ -8,7 +8,7 @@ export interface Personnel {
     date_naissance: Date;
     competences?: Competence[]; // Liste des compétences
   }
-  
+
   export interface Competence {
     idComp: number;
     libelle: string;
@@ -21,4 +21,3 @@ export interface Personnel {
     description: string;
   }
 
-  
