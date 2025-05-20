@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { CompetenceService } from '../services/competence.service';
+import { Router } from '@angular/router';
 
 //IMPORTS PRIMENG
 import { ButtonModule } from 'primeng/button';
@@ -31,6 +32,7 @@ import { ChipModule } from 'primeng/chip';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
+
   userData: { idUtilisateur: number; nom: string; prenom: string; email: string; statut_personnel: string; date_embauche: string; date_naissance: string } | null = null;
   Competences: any[] = [];
   age: number | null = null;
@@ -39,7 +41,7 @@ export class ProfileComponent {
   userId!: number;
 
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private competenceService: CompetenceService) {}
+  constructor(private route: ActivatedRoute, private authService: AuthService, private competenceService: CompetenceService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -96,7 +98,7 @@ export class ProfileComponent {
     });
   }
 
-  editProfile(): void {
-    console.log('Edit profile');
+  goToEdit() {
+    this.router.navigate(['/dashboard/profile', this.userId, 'edit']);
   }
 }

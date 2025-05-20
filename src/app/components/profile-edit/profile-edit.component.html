@@ -1,0 +1,74 @@
+<p-card header="Modifier le profil" *ngIf="profileForm">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label>Prénom</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="prenom"
+        [ngClass]="{'ng-invalid': profileForm.controls['prenom'].invalid && profileForm.controls['prenom'].touched}"
+      />
+      <p-message
+        *ngIf="profileForm.controls['prenom'].invalid && profileForm.controls['prenom'].touched"
+        severity="error"
+        text="Prénom obligatoire"
+      ></p-message>
+    </div>
+    <div class="field">
+      <label>Nom</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="nom"
+        [ngClass]="{'ng-invalid': profileForm.controls['nom'].invalid && profileForm.controls['nom'].touched}"
+      />
+      <p-message
+        *ngIf="profileForm.controls['nom'].invalid && profileForm.controls['nom'].touched"
+        severity="error"
+        text="Nom obligatoire"
+      ></p-message>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input
+        type="email"
+        pInputText
+        formControlName="email"
+        [readonly]="true"
+        style="background-color: #eee;"
+      />
+    </div>
+    <div class="field">
+      <label>Date de naissance</label>
+      <p>{{ profileForm.controls['date_naissance'].value }}</p>
+    </div>
+    <div class="field">
+      <label>Date d'embauche</label>
+      <p>{{ profileForm.controls['date_embauche'].value }}</p>
+    </div>
+    <!-- Compétences juste en affichage -->
+    <div class="field">
+      <label>Compétences</label>
+      <div *ngIf="Competences && Competences.length > 0">
+        <p-chip *ngFor="let comp of Competences" class="!py-0 !pl-0 !pr-4">
+          <span class="{{comp.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
+            {{ comp.idComp}}
+          </span>
+          <span class="ml-2 font-medium">
+            {{ comp.libelle }}
+          </span>
+        </p-chip>
+      </div>
+      <div *ngIf="!Competences || Competences.length === 0" style="color: #aaa;">
+        Aucune compétence
+      </div>
+    </div>
+    <div style="margin-top:2rem; text-align:right;">
+      <button pButton type="submit" label="Enregistrer" [disabled]="profileForm.invalid"></button>
+    </div>
+  </form>
+</p-card>
+
+<div *ngIf="!profileForm" class="flex justify-content-center" style="margin-top:3rem;">
+  <p>Chargement du profil...</p>
+</div>
