@@ -11,6 +11,8 @@ import { PersonnelsComponent } from './personnels/personnels.component';
 import { MissionComponent } from './mission/mission.component';
 import { DashboardNewsComponent } from './dashboard-news/dashboard-news.component';
 import { CompetencesListComponent } from './competences-list/competences-list.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Route par défaut vers la landing page
@@ -20,6 +22,7 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginFormComponent },
       { path: 'register', component: RegisterFormComponent },
+      
     ],
   },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
@@ -29,6 +32,7 @@ export const routes: Routes = [
       {path: 'personnels', component: PersonnelsComponent},
       {path: 'mission', component: MissionComponent},
       {path: 'competences', component: CompetencesListComponent},
+      {path: 'profile/:id/edit', component: ProfileEditComponent },
     ]
    }
 ];

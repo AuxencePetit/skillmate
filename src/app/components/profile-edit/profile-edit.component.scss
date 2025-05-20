@@ -1,0 +1,40 @@
+:host {
+    display: block;
+    max-width: 600px;
+    margin: 2rem auto; /* centre le formulaire dans la page, avec marges verticales */
+    padding: 1rem;
+  }
+  
+  .field {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Style des labels pour qu'ils s'alignent bien */
+  .field label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* S'assurer que les input PrimeNG occupent toute la largeur du conteneur */
+  :host ::ng-deep input.p-inputtext, 
+  :host ::ng-deep .p-inputtextarea {
+    width: 100%;
+  }
+  
+  /* Adapter la largeur du composant p-multiSelect pour qu'il s'affiche en bloc */
+  :host ::ng-deep .p-multiselect {
+    width: 100%;
+  }
+  
+  /* Styles pour les messages d’erreur inline (p-message en variant simple) */
+  :host ::ng-deep .p-message.p-error {
+    margin-top: 0.25rem;
+  }
+  
+  /* Alignement du conteneur des boutons d'action */
+  .form-actions {
+    margin-top: 2rem;
+    text-align: right;
+  }
+  
