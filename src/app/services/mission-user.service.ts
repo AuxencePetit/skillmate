@@ -11,19 +11,23 @@ import { MissionService } from './mission.service';
 })
 export class MissionUserService {
 
-  constructor(private http: HttpClient, private personnelService: PersonnelService,private missionService: MissionService) { }
+  constructor(private http: HttpClient, private personnelService: PersonnelService, private missionService: MissionService) { }
 
   private apiUrl = 'http://localhost:3000/missionUser'; // Ajuste selon ton API
 
- getMissionUser(id: number): Observable<Mission[]> {
-  return this.http.get<Mission[]>(`${this.apiUrl}/user/${id}`);
-}
+  getMissionUser(id: number): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.apiUrl}/user/${id}`);
+  }
 
   getPersonnelByMission(id: number): Observable<Personnel[]> {
     return this.http.get<Personnel[]>(`${this.apiUrl}/mission/${id}`);
   }
 
-  addPersonnelToMission(idPersonel : number, idMission: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, { idPersonel, idMission });
+  addPersonnelToMission(idUtilisateur: number, idMission: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, { idUtilisateur, idMission });
+  }
+
+  removePersonnelFromMission(idPersonel: number, idMission: number): Observable<any> {
+    return this.http.request('delete', `${this.apiUrl}`, { body: { idUtilisateur: idPersonel, idMission } });
   }
 }

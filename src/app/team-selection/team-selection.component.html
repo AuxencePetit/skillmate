@@ -1,16 +1,30 @@
 <div class="p-4">
-  <h2>Proposition d'équipe pour la mission</h2>
-
-  <div *ngIf="competencesNecessaires.length > 0" class="mb-4">
-    <h3>Compétences requises :</h3>
-    <p-listbox [options]="competencesNecessaires" optionLabel="competence.libelle" [style]="{'width':'350px'}" [multiple]="false">
-      <ng-template let-comp pTemplate="item">
-        <div>
-          <span>{{ comp.competence?.libelle || comp.libelle }}</span>
-          <p-tag value="Quota : {{ comp.nombre_personne }}" severity="info" class="ml-2"></p-tag>
-        </div>
-      </ng-template>
-    </p-listbox>
+  <div *ngIf="competencesNecessaires.length > 0" class="box-100">
+    <div class="box-43">
+      <h3>Compétences nécessaires :</h3>
+      <p-chip *ngFor="let comp of competencesNecessaires" class="!py-0 !pl-0 !pr-4 chip">
+        <span class="{{comp.competence.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
+          {{ comp.competence.idComp}}
+        </span>
+        <span class="ml-2 font-medium">
+          {{ comp.competence.libelle }} ({{ getQuotaProgress(comp.competence.idComp) }} / {{ comp.nombre_personne }})
+        </span>
+      </p-chip>
+    </div>
+    <div class="box-43">
+      <h3>L'équipe</h3>
+      <div *ngFor="let emp of personnelSelectionnes" class="custom-chip">
+        <p>
+          {{ emp.nom }} {{ emp.prenom }}
+        </p>
+        <p-button *ngIf="emp.statut_personnel !== 'chef_projet'"
+            icon="pi pi-times"
+            size="small"
+            (click)="removePersonnelFromMission(emp)"
+        ></p-button>
+        <i *ngIf="emp.statut_personnel === 'chef_projet'" class="pi pi-crown"></i>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="personnelAffichage.length > 0">
@@ -21,6 +35,7 @@
           <th>Nom</th>
           <th>Pertinence</th>
           <th>Compétences en commun</th>
+          <th>Ajouter</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-emp>
@@ -33,6 +48,12 @@
             <ng-container *ngFor="let c of emp.competencesCommunes">
               <p-tag [value]="c.libelle" severity="info" class="mr-1"></p-tag>
             </ng-container>
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-plus"
+              (click)="addPersonnelToMission(emp)"
+            ></p-button>
           </td>
         </tr>
       </ng-template>

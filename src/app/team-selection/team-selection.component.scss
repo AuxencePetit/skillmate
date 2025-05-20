@@ -1,0 +1,36 @@
+@import '../../styles.scss';
+
+.box-100{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.box-43{
+  background-color: $main-green;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.chip{
+  margin: 0.25rem ;
+}
+h3{
+  color: $main-light;
+  margin: 0;
+}
+.custom-chip{
+  display: flex;
+  background-color: $main-dark;
+  color: $main-light;
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  justify-content: space-between;
+  p,i{
+    margin: auto 0;
+    font-size: 1rem;
+  }
+}
