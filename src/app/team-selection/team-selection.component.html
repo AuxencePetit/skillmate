@@ -1,0 +1,41 @@
+<div class="p-4">
+  <h2>Proposition d'équipe pour la mission</h2>
+
+  <div *ngIf="competencesNecessaires.length > 0" class="mb-4">
+    <h3>Compétences requises :</h3>
+    <p-listbox [options]="competencesNecessaires" optionLabel="competence.libelle" [style]="{'width':'350px'}" [multiple]="false">
+      <ng-template let-comp pTemplate="item">
+        <div>
+          <span>{{ comp.competence?.libelle || comp.libelle }}</span>
+          <p-tag value="Quota : {{ comp.nombre_personne }}" severity="info" class="ml-2"></p-tag>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </div>
+
+  <div *ngIf="personnelAffichage.length > 0">
+    <h3>Employés classés par pertinence :</h3>
+    <p-table [value]="personnelAffichage" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nom</th>
+          <th>Pertinence</th>
+          <th>Compétences en commun</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-emp>
+        <tr>
+          <td>{{ emp.nom }} {{ emp.prenom }}</td>
+          <td>
+            <p-badge [value]="emp.scorePertinence" severity="success"></p-badge>
+          </td>
+          <td>
+            <ng-container *ngFor="let c of emp.competencesCommunes">
+              <p-tag [value]="c.libelle" severity="info" class="mr-1"></p-tag>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
