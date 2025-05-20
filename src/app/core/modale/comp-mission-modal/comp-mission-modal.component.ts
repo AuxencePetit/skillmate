@@ -41,7 +41,7 @@ import { InputIconModule } from 'primeng/inputicon';
   templateUrl: './comp-mission-modal.component.html',
   styleUrl: './comp-mission-modal.component.scss'
 })
-export class CompMissionModalComponent {
+export class CompMissionModalComponent implements OnInit {
 
   @Input() displayModal: boolean = false;
   @Input() mission!: Mission;
@@ -68,6 +68,24 @@ export class CompMissionModalComponent {
     );
   }
 
+  ngOnInit() {
+    // Récupère d'abord toutes les compétences
+    this.competenceService.getCompetences().subscribe(
+      (competences: Competence[]) => {
+        // Puis récupère les compétences déjà attribuées à la mission
+        this.competenceService.getCompetencesByMissionId(this.mission.idMission).subscribe(
+          (missionComps: any[]) => {
+            const idsAttribues = missionComps.map(c => c.idComp);
+            // Filtre pour ne garder que celles non attribuées
+            this.competences = competences.filter(c => !idsAttribues.includes(c.idComp));
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching competences:', error);
+      }
+    );
+  }
   closeModal() {
     this.displayModal = false;
     this.displayModalChange.emit(this.displayModal);
