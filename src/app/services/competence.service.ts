@@ -54,9 +54,13 @@ export class CompetenceService {
 
   // ajouter une compétence à une mission
   addCompetenceToMission(idMission: number, idCompetence: number, nombre_personne: number): Observable<any> {
-  return this.http.post(`${this.apiUrl}/mission/${idMission}`, {
-    idCompetence,
-    nombre_personne
-  });
-}
+    return this.http.post(`${this.apiUrl}/mission/${idMission}`, {
+      idCompetence,
+      nombre_personne
+    });
+  }
+  // supprimer une compétence d'une mission
+  deleteCompetenceFromMission(idMission: number, idCompetence: number): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/mission/${idMission}/competence/${idCompetence}`);
+  }
 }

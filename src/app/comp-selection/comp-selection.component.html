@@ -1,0 +1,40 @@
+<div>
+  <div>
+    <div class="table-title">
+      <h2>
+        Liste des compétences
+      </h2>
+      <p-button icon="pi pi-plus" [rounded]="true" styleClass="alternateBtn" (click)="openModal()"/>
+    </div>
+  </div>
+  <p-table [value]="competencesNecessaires" stripedRows [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th>Libelle</th>
+            <th>Description</th>
+            <th>Nombre Employés</th>
+            <th>Suppression</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-ncomp>
+        <tr>
+            <td>{{ ncomp.libelle }}</td>
+            <td>{{ ncomp.description }}</td>
+            <td>{{ ncomp.nombre_personne  }}</td>
+            <td>
+              <p-button icon="pi pi-trash" [rounded]="true" styleClass="alternateBtn" (click)="deleteCompetence(ncomp.idComp)"/>
+            </td>
+        </tr>
+    </ng-template>
+     <ng-template #emptymessage>
+        <tr>
+          <td colspan="5">Aucune compétence attribuée</td>
+        </tr>
+      </ng-template>
+</p-table>
+  <app-comp-mission-modal
+    [(displayModal)]="isModalVisible"
+    [mission]="mission!"
+    (modalClosed)="onModalClose()">
+  </app-comp-mission-modal>
+</div>

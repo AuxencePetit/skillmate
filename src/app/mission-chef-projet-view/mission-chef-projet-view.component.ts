@@ -4,6 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CompMissionModalComponent } from '../core/modale/comp-mission-modal/comp-mission-modal.component';
+import { CompSelectionComponent} from '../comp-selection/comp-selection.component';
+import { TeamSelectionComponent } from '../team-selection/team-selection.component';
+import { CommonModule } from '@angular/common';
 
 //models
 import { Competence } from '../models/personnel.model';
@@ -25,10 +28,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { SelectModule } from 'primeng/select';
+import { StepsModule } from 'primeng/steps';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-mission-chef-projet-view',
   imports: [
+    CommonModule,
     DialogModule,
     ButtonModule,
     InputTextModule,
@@ -36,56 +42,66 @@ import { SelectModule } from 'primeng/select';
     FormsModule,
     TableModule,
     SelectModule,
-    CompMissionModalComponent
+    StepsModule,
+    CompSelectionComponent,
+    TeamSelectionComponent
   ],
   templateUrl: './mission-chef-projet-view.component.html',
   styleUrl: './mission-chef-projet-view.component.scss'
 })
 export class MissionChefProjetViewComponent {
-editCompetence(_t19: any) {
-throw new Error('Method not implemented.');
-}
-deleteCompetence(_t19: any) {
-throw new Error('Method not implemented.');
-}
-  competencesNecessaires: NecessiterMissionComp[] = [];
-  Personnels: Personnel[] = [];
-  @Output() mission: Mission | null = null;
-  isModalVisible: boolean = false;
+
+  active : number = 0;
+  customBtnLabel: string = 'Suivant';
   userInfo: { idUtilisateur: number; nom: string; prenom: string; email: string } | null = null;
+  items: MenuItem[] = [];
+  @Output() mission: Mission | null = null;
 
   constructor(
-    private personnelsService: PersonnelService,
-    private competenceService: CompetenceService,
     private missionUserService: MissionUserService,
     private sessionService: SessionService
-  ) {}
-  ngOnInit() {
+  ) {
+    this.items = [
+      {
+        label: 'Les compétences',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.active = 0;
+        }
+      },
+      {
+        label: 'L\'équipe',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.active = 1;
+        }
+      },
+      {
+        label: 'Valider la mission',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.active = 2;
+        }
+      }
+    ];
     this.userInfo = this.sessionService.getUserInfo();
-    if (!this.userInfo) {
-      // Redirige si non connecté
-      return;
-    }
-    this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((missions: Mission[]) => {
-      this.mission = missions[0];
-      console.log('Mission reçue :', this.mission);
-      this.updateCompetences();
-    });
-  }
-  openModal() {
-    this.isModalVisible = true;
-  }
-  onModalClose() {
-    this.isModalVisible = false;
-    this.updateCompetences();
-  }
-
-  updateCompetences() {
-    if (this.mission) {
-      this.competenceService.getCompetencesByMissionId(this.mission.idMission).subscribe((competences: NecessiterMissionComp[]) => {
-        this.competencesNecessaires = competences;
-        console.log('Compétences nécessaires :', this.competencesNecessaires);
+        console.log('User info :', this.userInfo);
+        this.missionUserService.getMissionUser(this.userInfo!.idUtilisateur).subscribe((missions: Mission[]) => {
+              this.mission = missions[0];
+              console.log('Mission reçue :', this.mission);
       });
+  }
+  onPrevious() {
+    if(this.active > 0){
+      this.customBtnLabel = 'Suivant';
+      this.active--;
+    }
+  }
+  onNext(){
+    if(this.active < 2){
+      this.active++;
+    }else{
+      this.customBtnLabel = 'Valider les préparatifs';
     }
   }
 }
