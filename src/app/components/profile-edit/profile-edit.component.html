@@ -34,17 +34,29 @@
         type="email"
         pInputText
         formControlName="email"
-        [readonly]="true"
-        style="background-color: #eee;"
+        readonly
+        style="background-color: #eee; color: #a0a4ac;"
       />
     </div>
     <div class="field">
       <label>Date de naissance</label>
-      <p>{{ profileForm.controls['date_naissance'].value }}</p>
+      <input
+        type="text"
+        pInputText
+        [value]="profileForm.controls['date_naissance'].value ? (profileForm.controls['date_naissance'].value | date:'dd/MM/yyyy') : ''"
+        readonly
+        style="background-color: #eee; color: #a0a4ac;"
+      />
     </div>
     <div class="field">
       <label>Date d'embauche</label>
-      <p>{{ profileForm.controls['date_embauche'].value }}</p>
+      <input
+        type="text"
+        pInputText
+        [value]="profileForm.controls['date_embauche'].value ? (profileForm.controls['date_embauche'].value | date:'dd/MM/yyyy') : ''"
+        readonly
+        style="background-color: #eee; color: #a0a4ac;"
+      />
     </div>
     <!-- Compétences juste en affichage -->
     <div class="field">

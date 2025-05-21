@@ -41,7 +41,6 @@ export class MissionOverviewComponent implements OnInit {
         idMission: c.idMission,
         nombre_personne: c.nombre_personne
       }));
-      console.log(this.competences);
     }
     );
     this.missionUserService.getPersonnelByMission(this.mission!.idMission).subscribe((equipe: Personnel[]) => {
@@ -54,7 +53,6 @@ export class MissionOverviewComponent implements OnInit {
           ...p,
           competences: allCompetences[idx] || []
         }));
-        console.log(this.equipe); // Chaque personnel a maintenant ses compétences
       });
     });
   }
@@ -67,7 +65,6 @@ export class MissionOverviewComponent implements OnInit {
 
       }
     });
-    console.log("user :"+user.prenom + " compt = " + competencesCommune);
     return competencesCommune;
   }
 }

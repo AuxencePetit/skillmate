@@ -103,19 +103,6 @@ export class TeamSelectionComponent implements OnInit {
         const idsSelectionnes = this.personnelSelectionnes.map(p => p.idUtilisateur);
         const manque = this.getManqueParCompetence();
 
-        // === DEBUG : Vérification des correspondances ===
-        console.log('--- DEBUG ---');
-        console.log('competencesNecessaires:', this.competencesNecessaires.map(c => ({
-          idComp: c.competence.idComp,
-          libelle: c.competence.libelle
-        })));
-        this.ListePersonnel.forEach((personnel, idx) => {
-          const competences = allCompetences[idx] || [];
-          console.log(`Personnel: ${personnel.nom} ${personnel.prenom} (${personnel.idUtilisateur})`);
-          console.log('Compétences:', competences.map(c => c.idComp));
-        });
-        // === FIN DEBUG ===
-
         this.personnelAffichage = this.ListePersonnel
           .filter(personnel => !idsSelectionnes.includes(personnel.idUtilisateur))
           .map((personnel) => {
@@ -124,9 +111,7 @@ export class TeamSelectionComponent implements OnInit {
             const competences = allCompetences[idxOriginal] || [];
             const idsNecessaires = this.competencesNecessaires.map(c => String(c.competence.idComp));
             // DEBUG : Vérification du mapping
-            console.log(`idsNecessaires pour ${personnel.nom}:`, idsNecessaires);
             const competencesCommunes = competences.filter(c => idsNecessaires.includes(String(c.idComp)));
-            console.log(`competencesCommunes pour ${personnel.nom}:`, competencesCommunes.map(c => c.idComp));
             const scoreQuota = competencesCommunes.reduce((sum, c) => sum + (manque[String(c.idComp)] ?? 0), 0);
             return {
               ...personnel,

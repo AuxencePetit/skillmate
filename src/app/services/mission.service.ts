@@ -45,6 +45,11 @@ export class MissionService {
     );
   }
 
+// mission-user.service.ts ou mission.service.ts
+updateMissionStatus(idMission: number, statut: string) {
+  return this.http.patch(`${this.apiUrl}/${idMission}/statut`, { statut_mission: statut });
+}
+
   deleteMission(id: number): Observable<Mission> {
     return this.http.delete<Mission>(`${this.apiUrl}/${id}`);
   }
