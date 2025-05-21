@@ -1,0 +1,50 @@
+@import '../../styles.scss';
+
+.chip-custom {
+  background-color: $main-green;
+  color: $main-light;
+  margin-left: 1rem;
+}
+
+.mission-header {
+  display: flex;
+  align-items: center;
+}
+
+.custom-chip{
+  display: flex;
+  background-color: $main-dark;
+  color: $main-light;
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  justify-content: space-between;
+  p,i{
+    margin: auto 0;
+    font-size: 1rem;
+  }
+}
+
+.comp-tab{
+  margin: 1rem;
+  background-color: $main-green;
+  color: $main-light;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.competences{
+  background-color: $main-green;
+  color: $main-light;
+  padding: 1rem;
+  border-radius: 8px;
+
+  h2{
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  p-chip{
+    margin: 0.5rem;
+    font-size: 1rem;
+  }
+}

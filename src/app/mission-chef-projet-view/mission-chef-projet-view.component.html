@@ -8,7 +8,16 @@
   <app-comp-selection [mission]="mission"></app-comp-selection>
 </div>
 <div *ngIf="active === 1 && mission">
-  <app-team-selection [mission]="mission"></app-team-selection>
+  <app-team-selection
+  [mission]="mission"
+  (personnelSelectionnesChange)="onPersonnelSelectionnesChange($event)"
+  (competencesNecessairesChange)="onCompetencesNecessairesChange($event)"
+  ></app-team-selection>
+</div>
+<div *ngIf="active === 2 && mission">
+  <app-mission-overview
+  [mission]="mission"
+  ></app-mission-overview>
 </div>
 
 <div class="btn-footer">

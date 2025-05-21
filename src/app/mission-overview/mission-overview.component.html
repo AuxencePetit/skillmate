@@ -1,0 +1,42 @@
+<div class="mission-header">
+  <h1>{{ mission?.nom_mission}}</h1>
+  <p-chip label="{{mission?.statut_mission}}" class="chip-custom" />
+</div>
+
+<div class="competences">
+  <h2>Compétences</h2>
+  <p-chip *ngFor="let comp of competences" class="!py-0 !pl-0 !pr-4">
+    <span
+      class="{{comp.competence.idCategorie}} text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">
+      {{ comp.competence.idComp}}
+    </span>
+    <span class="ml-2 font-medium">
+      {{ comp.competence.libelle }}
+    </span>
+  </p-chip>
+</div>
+<div class="eqp">
+  <h2>Votre équipe</h2>
+  <p-table [value]="equipe" stripedRows [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th>Personne</th>
+            <th>Compétence commune</th>
+            <th>Rôle</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-emp>
+        <tr>
+            <td>{{ emp.nom }} {{ emp.prenom }}</td>
+            <td>
+                 <span *ngFor="let comp of getCompetenceCommune(emp)" class="comp-tab">
+                      {{ comp.libelle }}
+                  </span>
+            </td>
+            <td>
+              <i *ngIf="emp.statut_personnel !== 'chef_projet'" class="pi pi-cog"></i>
+              <i *ngIf="emp.statut_personnel === 'chef_projet'" class="pi pi-crown"></i>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

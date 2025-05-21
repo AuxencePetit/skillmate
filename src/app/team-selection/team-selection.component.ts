@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Mission, NecessiterMissionComp } from '../models/mission.model';
@@ -41,6 +41,8 @@ export class TeamSelectionComponent implements OnInit {
 
 
   @Input() mission!: Mission;
+  @Output() personnelSelectionnesChange = new EventEmitter<Personnel[]>();
+  @Output() competencesNecessairesChange = new EventEmitter<NecessiterMissionComp[]>();
   ListePersonnel: Personnel[] = [];
   competencesNecessaires: NecessiterMissionComp[] = [];
   personnelAffichage: PersonnelAffichage[] = [];
@@ -146,6 +148,8 @@ export class TeamSelectionComponent implements OnInit {
   addPersonnelToMission(personnel: Personnel) {
     this.personnelSelectionnes.push(personnel);
     this.personnelAffichage = this.personnelAffichage.filter(p => p.idUtilisateur !== personnel.idUtilisateur);
+    this.personnelSelectionnesChange.emit(this.personnelSelectionnes);
+    this.competencesNecessairesChange.emit(this.competencesNecessaires);
     this.missionUserService.addPersonnelToMission(personnel.idUtilisateur, this.mission.idMission).subscribe(() => {
       this.messageService.add({
         severity: 'success',
@@ -159,6 +163,8 @@ export class TeamSelectionComponent implements OnInit {
   removePersonnelFromMission(personnel: Personnel) {
     this.personnelSelectionnes = this.personnelSelectionnes.filter(p => p.idUtilisateur !== personnel.idUtilisateur);
     this.personnelAffichage.push(personnel as PersonnelAffichage);
+    this.personnelSelectionnesChange.emit(this.personnelSelectionnes);
+    this.competencesNecessairesChange.emit(this.competencesNecessaires);
     this.personnelAffichage.sort((a, b) =>
       b.scoreQuota - a.scoreQuota || b.scorePertinence - a.scorePertinence
     );

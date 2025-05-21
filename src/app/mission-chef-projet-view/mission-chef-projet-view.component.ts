@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CompMissionModalComponent } from '../core/modale/comp-mission-modal/comp-mission-modal.component';
 import { CompSelectionComponent} from '../comp-selection/comp-selection.component';
 import { TeamSelectionComponent } from '../team-selection/team-selection.component';
+import { MissionOverviewComponent } from '../mission-overview/mission-overview.component';
 import { CommonModule } from '@angular/common';
 
 //models
@@ -44,7 +45,8 @@ import { MenuItem } from 'primeng/api';
     SelectModule,
     StepsModule,
     CompSelectionComponent,
-    TeamSelectionComponent
+    TeamSelectionComponent,
+    MissionOverviewComponent,
   ],
   templateUrl: './mission-chef-projet-view.component.html',
   styleUrl: './mission-chef-projet-view.component.scss'
@@ -56,6 +58,17 @@ export class MissionChefProjetViewComponent {
   userInfo: { idUtilisateur: number; nom: string; prenom: string; email: string } | null = null;
   items: MenuItem[] = [];
   @Output() mission: Mission | null = null;
+  personnelSelectionnes: Personnel[] = [];
+  competencesNecessaires: NecessiterMissionComp[] = [];
+
+
+
+  onPersonnelSelectionnesChange(list: Personnel[]) {
+    this.personnelSelectionnes = list;
+  }
+  onCompetencesNecessairesChange(list: NecessiterMissionComp[]) {
+    this.competencesNecessaires = list;
+  }
 
   constructor(
     private missionUserService: MissionUserService,
